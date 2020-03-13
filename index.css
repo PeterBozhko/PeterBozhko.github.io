@@ -10,7 +10,16 @@
 .section-description {
     background: url("map.jpg") rgba(255, 255, 255, 0.1);
     background-size: cover;
-    color: white;
+    color: darkblue;
+}
+
+.image-href {
+    display: inline-block;
+    width: 5em;
+    margin-left: 2em;
+}
+.image-href:first-child {
+    margin-left: 0;
 }
 h2 {
     text-align: center;
