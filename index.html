@@ -2,65 +2,75 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta property="og:site_name" content="Словари и энциклопедии на Академике" />
-    <title>My first site</title>
+    <title>My weather site</title>
     <link rel="stylesheet" href="index.css" type="text/css">
 </head>
 <body>
-<header></header>
+<header>
+    <h2>Погода здесь</h2>
+    <button>Обновить геолокацию</button>
+</header>
 <main>
-    <div class="section call-to-action">
-        <div class="container">
-            <h1>Лучшие экскурсии по Санкт-Петербургу!</h1>
-            <div class="row">
-                <div class="one-half">
-                    <h3>Санкт-Петербург пропускает через себя больше 10 млн туристов в год.</h3>
-                    <h3>Кто-то ездит на обзорные экскурсии, кого-то на прогулках по городу сопровождают друзья.
-                        Если ты - отчаянный путешественник, который хочет посмотреть на город изнутри,
-                        мы погрузим тебя в атмосферу Петербурга в познавательной обстановке.
-                        А коренным петербуржцам мы покажем такие закоулки, о которых вы даже не подозревали.
-                        Звони, приходи, играй!</h3>
-                    <ul class="list">
-                        <li class="red">
-                            Более 300 красивейших достопримечательностей
-                        </li>
-                        <li class="blue">
-                            5 интереснейших маршрутов в разных частях города
-                        </li>
-                        <li class="yellow">
-                            Одни из лучших экскурсоводов города
-                        </li>
-                    </ul>
-                    <button class="button">Записаться</button>
-                </div>
-                <div class="second-half">
-                    <img alt="picture" src="image_1.jpg">
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="section section-description">
-        <div class="container">
-            <h2>ЧТО МЫ ПРЕДОСТАВЛЯЕМ</h2>
-            <h3> У нас целый ассортимент разнообразных экскурсий и квестов по городу. Самые популярные представлены ниже</h3>
-            <div class="one-third">
-                <h4>Квесты "от метро до метро"</h4>
-                <p>Формат квестов в разных районах города, старт и финиш которых находится вблизи разных станций метро.
-                    Маршрут проложен как по известным достопримечательностям, так и по интересным арт-объектам в закоулках дворов.</p>
-            </div>
-            <div class="one-third">
-                <h4>Наперегонки по Питеру</h4>
-                <p>По мотивам игрового телешоу. Две команды соревнуются в скорости выполнения заданий на точках.
-                    Маршрут составляется участниками команды, потому что подсказку к следующей точке можно узнать только после выполнения на предыдущей.</p>
-            </div>
-            <div class="one-third">
-                <h4>Автомобильные прогулки по ночному городу</h4>
-                <p>Перемещения по городу ночью намного продуктивнее, чем днем в огромном потоке машин.
-                    Поэтому за то же время вы успеете увидеть в несколько раз больше достопримечательностей, даже если они довольно далеко.</p>
-            </div>
-        </div>
-
-    </div>
+    <section class="home">
+        <h1>Saint-Petersburg</h1>
+        <p>8 C</p>
+        <img class="image" src="image.png" alt="weather's icon">
+        <ul class="parameters">
+            <li>Ветер <i>5 m/s</i></li>
+            <li>Облачность</li>
+            <li>Давление</li>
+            <li>Влажность</li>
+            <li>Координаты</li>
+        </ul>
+    </section>
+    <section class="favorites-description">
+        <h1>Избранное</h1>
+        <input type="text" id="new-city">
+        <label for="new-city"><button>+</button></label>
+    </section>
+    <section class="favorites">
+        <ul class="favorites-ul">
+            <li>
+                <h1>Saint-Petersburg</h1>
+                <p>8 C</p>
+                <img class="image" src="image.png" alt="weather's icon">
+                <button class="cancel-btn">X</button>
+                <ul class="parameters">
+                    <li>Ветер <i>5 m/s</i></li>
+                    <li>Облачность</li>
+                    <li>Давление</li>
+                    <li>Влажность</li>
+                    <li>Координаты</li>
+                </ul>
+            </li>
+            <li>
+                <h1>Saint-Petersburg</h1>
+                <p>8 C</p>
+                <img class="image" src="image.png" alt="weather's icon">
+                <button class="cancel-btn">X</button>
+                <ul class="parameters">
+                    <li>Ветер <i>5 m/s</i></li>
+                    <li>Облачность</li>
+                    <li>Давление</li>
+                    <li>Влажность</li>
+                    <li>Координаты</li>
+                </ul>
+            </li>
+            <li>
+                <h1>Saint-Petersburg</h1>
+                <p>8 C</p>
+                <img class="image" src="image.png" alt="weather's icon">
+                <button class="cancel-btn">X</button>
+                <ul class="parameters">
+                    <li>Ветер <i>5 m/s</i></li>
+                    <li>Облачность</li>
+                    <li>Давление</li>
+                    <li>Влажность</li>
+                    <li>Координаты</li>
+                </ul>
+            </li>
+        </ul>
+    </section>
     <div class="section container feedback">
         <h3>Задай интересующий вопрос нам и мы тебе ответим!</h3>
         <form>
@@ -73,11 +83,5 @@
         <p><button type="submit">Отправить</button></p>
     </div>
 </main>
-<footer>
-<h3>Подробнее о нас:</h3>
-    <a class="image-href" href="https://facebook.com"><img src="https://www.facebook.com/images/fb_icon_325x325.png" alt=""></a>
-    <a class="image-href" href="https://youtube.ru"><img src="https://lamcdn.net/lookatme.ru/post-cover/RmX1uWAqZEDHYNjgiYp14Q-default.png" alt=""></a>
-    <a class="image-href" href="https://vk.com"><img src="https://upload.wikimedia.org/wikipedia/commons/9/9a/VK_Logo.png" alt=""></a>
-</footer>
 </body>
 </html>
