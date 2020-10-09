@@ -1,8 +1,70 @@
-.html {
+html {
     box-sizing: border-box;
 }
 
-.section {
+section {
     position: relative;
     padding: 2em 5em;
+}
+img {
+    border: solid 2px black;
+}
+ul.parameters {
+    list-style-type: none;
+    border: 5px black;
+}
+ul.parameters > li {
+    display: flex;
+    justify-content: space-between;
+    /*max-width: 100%;*/
+    background-color: gray;
+    margin: 1vw;
+    padding: 1vw;
+    border-radius: 1vw;
+    border: solid 1px black;
+    color: white;
+}
+ul.parameters > li > b {
+    margin-right: 1vw;
+}
+.home {
+    display: grid;
+    grid-template-columns: 1fr 1fr 0.5fr 2fr;
+    grid-template-areas: "name name nothing weather"
+    "icons temp nothing weather";
+}
+.home > h2 {
+    grid-area: name;
+    font-size: 4vw;
+    max-width: 100%;
+    margin: 0;
+}
+.home > ul {
+    margin: 0;
+    grid-area: weather;
+}
+.home > ul > li {
+    font-size: 2vw;
+}
+.home > img{
+    grid-area: icons;
+    width: 15vw;
+}
+.home > span{
+    display: flex;
+    word-wrap: break-word;
+    justify-content: center;
+    border: solid 1px red;
+    grid-area: temp;
+    font-size: 12vw;
+
+}
+.favorites > ul{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+
+}
+.favorites li {
+    border: solid 1px blue;
 }
