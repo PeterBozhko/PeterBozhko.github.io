@@ -11,7 +11,8 @@ img {
 }
 ul.parameters {
     list-style-type: none;
-    border: 5px black;
+    border: solid 5px pink;
+    padding: 0;
 }
 ul.parameters > li {
     display: flex;
@@ -59,12 +60,61 @@ ul.parameters > li > b {
     font-size: 12vw;
 
 }
+
+.favorites-description {
+    display: flex;
+    justify-content: space-between;
+}
 .favorites > ul{
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
+    list-style-type: none;
 
 }
-.favorites li {
+.favorites .description {
+    border: solid 2px green;
+    width: 100%;
+}
+.favorites .parameters {
+    border: solid 1px red;
+    width: 100%
+}
+.favorites .description h2 {
     border: solid 1px blue;
+    display: inline-block;
+    font-size: 3vw;
+    margin: 1vw;
+}
+.favorites .description p {
+    border: solid 1px blue;
+    display: inline-block;
+    font-size: 3vw;
+    margin: 1vw;
+}
+.favorites .description img {
+    border: solid 1px blue;
+    position: relative;
+    top: 3vw;
+    display: inline-block;
+    max-width: 6vw;
+}
+.favorites  .description button {
+    border: solid 1px blue;
+    display: inline-block;
+}
+
+
+.favorites button, .favorites-description button {
+    border: none;
+    margin: 1vw;
+    background-color: gray;
+    color: white;
+    width: 5vw;
+    height: 5vw;
+    font-size: 3vw;
+    border-radius: 50%;
+}
+.favorites button {
+    font-size: 4vw;
 }
