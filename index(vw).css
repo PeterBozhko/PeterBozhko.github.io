@@ -1,11 +1,10 @@
 html {
     box-sizing: border-box;
 }
-
 section, header {
     position: relative;
     padding: 2rem 5rem;
-    border: dashed 2px blue;
+    /*border: dashed 2px blue;*/
     width: 70%;
     margin:0 15%;
 }
@@ -31,7 +30,7 @@ img {
 }
 ul.parameters {
     list-style-type: none;
-    border: solid 5px pink;
+    /*border: solid 5px pink;*/
     padding: 0;
 }
 ul.parameters > li {
@@ -39,15 +38,15 @@ ul.parameters > li {
     justify-content: space-between;
     /*max-width: 100%;*/
     background-color: gray;
-    margin: .7rem;
-    padding: .3rem .7rem;
-    border-radius: .7rem;
+    margin: .7vw;
+    padding: 0.3vw .7vw;
+    border-radius: .7vw;
     border: solid 1px black;
     color: white;
-    font-size: 1.5rem;
+    font-size: 1.5vw;
 }
 ul.parameters > li > b {
-    margin-right: .7rem;
+    margin-right: .7vw;
 }
 .home {
     display: grid;
@@ -57,7 +56,7 @@ ul.parameters > li > b {
 }
 .home > h2 {
     grid-area: name;
-    font-size: 3rem;
+    font-size: 3vw;
     max-width: 100%;
     margin: 0;
 }
@@ -68,15 +67,15 @@ ul.parameters > li > b {
 
 .home > img{
     grid-area: icons;
-    width: 10rem;
+    width: 10vw;
 }
 .home > span{
     display: flex;
     word-wrap: break-word;
     justify-content: center;
-    border: solid 1px red;
+    /*border: solid 1px red;*/
     grid-area: temp;
-    font-size: 6rem;
+    font-size: 9vw;
 
 }
 
@@ -94,40 +93,34 @@ ul.parameters > li > b {
 
 }
 .favorites .description {
-    display: inline-block;
     border: solid 2px green;
     white-space: nowrap;
-}
-.favorites .description::after {
-    content: "";
-    display: block;
-    clear: both;
+
 }
 .favorites .parameters {
-    border: solid 1px red;
-    width: 100%
+    /*border: solid 1px red;*/
 }
 .favorites .description h2 {
-    border: solid 1px blue;
+    /*border: solid 1px blue;*/
     display: inline-block;
-    font-size: 2rem;
-    margin: 0 .7rem;
+    font-size: 2vw;
+    margin: 0 .7vw;
 }
 .favorites .description p {
-    border: solid 1px blue;
+    /*border: solid 1px blue;*/
     display: inline-block;
-    font-size: 2rem;
-    margin: 0 .7rem;
+    font-size: 2vw;
+    margin: 0 .7vw;
 }
 .favorites .description img {
-    border: solid 1px blue;
+    /*border: solid 1px blue;*/
     display: inline-block;
-    max-width: 4rem;
+    max-width: 4vw;
     position: relative;
-    top: 1rem;
+    top: 1.5vw;
 }
 .favorites  .description button {
-    border: solid 1px blue;
+    /*border: solid 1px blue;*/
     display: inline-block;
     margin-left: 10%;
 }
@@ -135,11 +128,14 @@ ul.parameters > li > b {
 
 .favorites button, .favorites-description button {
     border: none;
-    margin: 0 .7rem;
+    margin: 0 .7vw;
     background-color: gray;
     color: white;
-    width: 3rem;
-    height: 3rem;
-    font-size: 2rem;
+    width: 3.5vw;
+    height: 3.5vw;
+    font-size: 2vw;
     border-radius: 50%;
+}
+.favorites button {
+    font-size: 3vw;
 }
