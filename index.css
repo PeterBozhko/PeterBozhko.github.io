@@ -86,25 +86,38 @@ ul.parameters > li > b {
 .favorites-description {
     display: flex;
     justify-content: space-between;
+    justify-items: baseline;
+}
+.favorites-description h2{
+    font-size: 2rem;
+    margin: 0 0 .5rem;
 }
 .favorites-description input {
     font-size: 1.5rem;
 }
-.favorites-ul{
+.favorites-ul {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
     list-style-type: none;
     margin: 0;
     padding: 0;
+}
+.favorites-ul li{
+    border: solid 1px black;
+    margin: .5rem;
+    display: grid;
+    grid-template-areas:
+            "descr"
+            "param";
 
 }
 .favorites .description {
-    display: block;
+    grid-area: descr;
     position: relative;
-    /*border: solid 2px green;*/
+    border: solid 2px green;
     max-width: 100%;
-    padding-right: 5rem;
+    padding: 0 5rem .5rem 0;
 }
 /*.favorites .description::after {*/
 /*    content: "";*/
@@ -112,10 +125,11 @@ ul.parameters > li > b {
 /*    clear: both;*/
 /*}*/
 .favorites .parameters {
+    grid-area: param;
     /*border: solid 1px red;*/
     max-width: 100%
 }
-.favorites .description h2 {
+.favorites .description h3 {
     /*border: solid 1px blue;*/
     display: inline-block;
     font-size: 2rem;
@@ -137,7 +151,7 @@ ul.parameters > li > b {
 .favorites button {
     position: absolute;
     right: 0;
-    top: 1rem;
+    top: 1.5rem;
     /*border: solid 1px blue;*/
     display: block;
 }
@@ -153,10 +167,13 @@ ul.parameters > li > b {
     font-size: 2rem;
     border-radius: 50%;
 }
-.favorites button, .favorites-description button:hover { background: lightgray; } /* при наведении курсора мышки */
-.favorites button, .favorites-description button:active { background: darkgray;} /* при нажатии */
+.favorites button:hover, .favorites-description button:hover { background: lightgray; } /* при наведении курсора мышки */
+.favorites button:active, .favorites-description button:active { background: darkgray;} /* при нажатии */
 
 @media screen and (max-width: 1080px) {
+    html {
+        font-size: 14px;
+    }
     section, header {
         position: relative;
         padding: 2rem 5rem;
@@ -190,6 +207,13 @@ ul.parameters > li > b {
     .favorites-description {
         display: block;
     }
+    .favorites-description label{
+        display: flex;
+        flex-basis: auto;
+    }
+    .favorites-description input{
+        flex-grow: 1;
+    }
     header img {
         display: inline-block;
         width: 1.5rem;
@@ -205,5 +229,10 @@ ul.parameters > li > b {
 
     header button {
         display: none;
+    }
+}
+@media screen and (max-width: 600px) {
+    html {
+        font-size: 12px;
     }
 }
