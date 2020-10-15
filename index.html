@@ -9,6 +9,7 @@
 <header>
     <h1>Погода здесь</h1>
     <button>Обновить геолокацию</button>
+    <img src="update.png" alt="update">
 </header>
 <main>
     <section class="home">
@@ -25,7 +26,7 @@
     </section>
     <section class="favorites-description">
         <h1>Избранное</h1>
-        <label for="new-city"><input type="text" id="new-city"><button name="add">+</button></label>
+        <label for="new-city"><input type="text" id="new-city" maxlength="15" placeholder="Добавьте новый город"><button name="add">+</button></label>
     </section>
     <section class="favorites">
         <ul class="favorites-ul">
@@ -34,8 +35,8 @@
                     <h2>Moscow</h2>
                     <p>8&deg;C</p>
                     <img class="image" src="image.png" alt="weather's icon">
+                    <button class="cancel-btn">&times;</button>
                 </div>
-                <button class="cancel-btn">&times;</button>
                 <ul class="parameters">
                     <li><b>Ветер</b>5 m/s</li>
                     <li><b>Облачность</b>Низкая</li>

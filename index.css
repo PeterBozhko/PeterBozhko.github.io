@@ -6,8 +6,7 @@ section, header {
     position: relative;
     padding: 2rem 5rem;
     border: dashed 2px blue;
-    width: 70%;
-    margin:0 15%;
+    margin: auto;
 }
 header h1{
     display: inline-block;
@@ -17,15 +16,18 @@ header button {
     position: absolute;
     left: 50%;
     transform: translate(-50%, 0);
-    color: gray;
-    background: darkgray;
+    color: #89969c;
+    background: #c9d2d7;
     padding: 1em 2em;
     border: none;
     border-radius: .4em;
 }
-header button:hover { background: lightgray; } /* при наведении курсора мышки */
-header button:active { background: black; } /* при нажатии */
+header button:hover { background: #a7b0b5; } /* при наведении курсора мышки */
+header button:active { background: #c9d2d7; } /* при нажатии */
 
+header img {
+    display: none;
+}
 img {
     border: solid 2px black;
 }
@@ -84,6 +86,9 @@ ul.parameters > li > b {
     display: flex;
     justify-content: space-between;
 }
+.favorites-description input {
+    font-size: 1.5rem;
+}
 .favorites-ul{
     display: flex;
     flex-wrap: wrap;
@@ -97,12 +102,13 @@ ul.parameters > li > b {
     display: inline-block;
     border: solid 2px green;
     white-space: nowrap;
+    width: inherit;
 }
-.favorites .description::after {
-    content: "";
-    display: block;
-    clear: both;
-}
+/*.favorites .description::after {*/
+/*    content: "";*/
+/*    display: block;*/
+/*    clear: both;*/
+/*}*/
 .favorites .parameters {
     border: solid 1px red;
     width: 100%
@@ -126,10 +132,12 @@ ul.parameters > li > b {
     position: relative;
     top: 1rem;
 }
-.favorites  .description button {
+.favorites button {
+    position: relative;
     border: solid 1px blue;
     display: inline-block;
-    margin-left: 10%;
+    margin-right: 0;
+    margin-left: 2rem;
 }
 
 
@@ -142,4 +150,60 @@ ul.parameters > li > b {
     height: 3rem;
     font-size: 2rem;
     border-radius: 50%;
+}
+.favorites button, .favorites-description button:hover { background: lightgray; } /* при наведении курсора мышки */
+.favorites button, .favorites-description button:active { background: darkgray;} /* при нажатии */
+
+@media screen and (max-width: 1080px) {
+    .home {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-template-areas: "name name"
+        "icons temp"
+        "weather weather";
+    }
+    .home > img{
+        grid-area: icons;
+        width: 7rem;
+    }
+    .home > span{
+        display: flex;
+        word-wrap: break-word;
+        justify-content: center;
+        border: solid 1px red;
+        grid-area: temp;
+        font-size: 4rem;
+
+    }
+    .favorites-ul{
+        display: block;
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+    }
+    .favorites .description {
+        display: inline-block;
+        border: solid 2px green;
+        white-space: nowrap;
+        width: inherit;
+    }
+    .favorites-description {
+        display: block;
+    }
+    header img {
+        display: inline-block;
+        width: 1.5rem;
+        color: #89969c;
+        background: #c9d2d7;
+        padding: 0.5rem;
+        margin-left: 2rem;
+        border: none;
+        border-radius: .4em;
+    }
+    header img:hover { background: #a7b0b5; } /* при наведении курсора мышки */
+    header img:active { background: #c9d2d7; } /* при нажатии */
+
+    header button {
+        display: none;
+    }
 }
