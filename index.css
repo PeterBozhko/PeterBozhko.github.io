@@ -5,7 +5,7 @@ html {
 section, header {
     position: relative;
     padding: 2rem 5rem;
-    border: dashed 2px blue;
+    /*border: dashed 2px blue;*/
     margin: auto;
 }
 header h1{
@@ -33,7 +33,7 @@ img {
 }
 ul.parameters {
     list-style-type: none;
-    border: solid 5px pink;
+    /*border: solid 5px pink;*/
     padding: 0;
 }
 ul.parameters > li {
@@ -76,7 +76,7 @@ ul.parameters > li > b {
     display: flex;
     word-wrap: break-word;
     justify-content: center;
-    border: solid 1px red;
+    /*border: solid 1px red;*/
     grid-area: temp;
     font-size: 6rem;
 
@@ -99,10 +99,11 @@ ul.parameters > li > b {
 
 }
 .favorites .description {
-    display: inline-block;
-    border: solid 2px green;
-    white-space: nowrap;
-    width: inherit;
+    display: block;
+    position: relative;
+    /*border: solid 2px green;*/
+    max-width: 100%;
+    padding-right: 5rem;
 }
 /*.favorites .description::after {*/
 /*    content: "";*/
@@ -110,34 +111,34 @@ ul.parameters > li > b {
 /*    clear: both;*/
 /*}*/
 .favorites .parameters {
-    border: solid 1px red;
-    width: 100%
+    /*border: solid 1px red;*/
+    max-width: 100%
 }
 .favorites .description h2 {
-    border: solid 1px blue;
+    /*border: solid 1px blue;*/
     display: inline-block;
     font-size: 2rem;
     margin: 0 .7rem;
 }
 .favorites .description p {
-    border: solid 1px blue;
+    /*border: solid 1px blue;*/
     display: inline-block;
     font-size: 2rem;
     margin: 0 .7rem;
 }
 .favorites .description img {
-    border: solid 1px blue;
+    /*border: solid 1px blue;*/
     display: inline-block;
     max-width: 4rem;
     position: relative;
     top: 1rem;
 }
 .favorites button {
-    position: relative;
-    border: solid 1px blue;
-    display: inline-block;
-    margin-right: 0;
-    margin-left: 2rem;
+    position: absolute;
+    right: 0;
+    top: 1rem;
+    /*border: solid 1px blue;*/
+    display: block;
 }
 
 
@@ -170,7 +171,6 @@ ul.parameters > li > b {
         display: flex;
         word-wrap: break-word;
         justify-content: center;
-        border: solid 1px red;
         grid-area: temp;
         font-size: 4rem;
 
@@ -180,12 +180,6 @@ ul.parameters > li > b {
         list-style-type: none;
         margin: 0;
         padding: 0;
-    }
-    .favorites .description {
-        display: inline-block;
-        border: solid 2px green;
-        white-space: nowrap;
-        width: inherit;
     }
     .favorites-description {
         display: block;
