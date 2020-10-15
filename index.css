@@ -6,6 +6,7 @@ section, header {
     position: relative;
     padding: 2rem 5rem;
     /*border: dashed 2px blue;*/
+    width: 80%;
     margin: auto;
 }
 header h1{
@@ -41,7 +42,7 @@ ul.parameters > li {
     justify-content: space-between;
     /*max-width: 100%;*/
     background-color: gray;
-    margin: .7rem;
+    margin: .7rem 0;
     padding: .3rem .7rem;
     border-radius: .7rem;
     border: solid 1px black;
@@ -156,6 +157,11 @@ ul.parameters > li > b {
 .favorites button, .favorites-description button:active { background: darkgray;} /* при нажатии */
 
 @media screen and (max-width: 1080px) {
+    section, header {
+        position: relative;
+        padding: 2rem 5rem;
+        max-width: 100%;
+    }
     .home {
         display: grid;
         grid-template-columns: 1fr 1fr;
