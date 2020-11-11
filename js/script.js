@@ -1,5 +1,4 @@
-let favoriteCities = [];
-
+let favoriteCities;
 function recieveWeatherData(cityName) {
     return {
         name: cityName,
@@ -85,7 +84,20 @@ function addCity() {
         alert('Город уже есть в списке');
         return;
     }
-    favoriteCities.push(cityName);
+    favoriteCities.push(cityName)
     localStorage.setItem('favoriteList', JSON.stringify(favoriteCities));
     createCityCard(recieveWeatherData(cityName));
+}
+
+function loadFavorites() {
+    if (localStorage.getItem('favoriteList') == null) {
+        favoriteCities = [];
+        return;
+    }
+    favoriteCities = JSON.parse(localStorage.getItem('favoriteList'));
+    console.log(favoriteCities);
+    for (let cityName of favoriteCities) {
+        console.log(cityName);
+        createCityCard(recieveWeatherData(cityName));
+    }
 }
