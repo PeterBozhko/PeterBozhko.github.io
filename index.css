@@ -107,6 +107,7 @@ ul.parameters > li > b {
     /*border: solid 1px black;*/
     margin: .5rem;
     display: grid;
+    flex-grow: 1;
     grid-template-areas:
             "descr"
             "param";
@@ -144,7 +145,8 @@ ul.parameters > li > b {
 .favorites .description img {
     /*border: solid 1px blue;*/
     display: inline-block;
-    max-width: 4rem;
+    width: 4rem;
+    height: 4rem;
     position: relative;
     top: 1rem;
 }
