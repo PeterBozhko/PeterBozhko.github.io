@@ -50,7 +50,7 @@ function createCityCard(city) {
     let cardDeleteButton = document.createElement('button');
     cardDeleteButton.setAttribute('class', 'cancel-btn');
     cardDeleteButton.innerHTML = '&times;'
-    cardDeleteButton.setAttribute('onclick', 'deleteCity(this);');
+    cardDeleteButton.setAttribute('onclick', 'deleteCity(this)');
     cardDescription.append(cardDeleteButton);
 
     card.append(cardDescription);
@@ -89,8 +89,17 @@ function addCity() {
     createCityCard(recieveWeatherData(cityName));
 }
 
+function deleteCity(el) {
+    let cityName = el.parentNode.querySelector('h3');
+    let index = favoriteCities.indexOf(cityName);
+    favoriteCities.splice(index, 1);
+    localStorage.setItem('favoriteList', JSON.stringify(favoriteCities));
+    let card = el.parentNode.parentNode;
+    card.parentNode.removeChild(card);
+}
+
 function loadFavorites() {
-    if (localStorage.getItem('favoriteList') == null) {
+    if (localStorage.getItem('favoriteList') === null) {
         favoriteCities = [];
         return;
     }

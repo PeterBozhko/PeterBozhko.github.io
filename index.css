@@ -163,7 +163,7 @@ ul.parameters > li > b {
 
 .favorites button, .favorites-description button {
     border: none;
-    margin: 0 .7rem;
+    margin: 0 0 0 .7rem;
     background-color: gray;
     color: white;
     width: 3rem;
