@@ -54,8 +54,8 @@ ul.parameters > li > b {
 }
 .home {
     display: grid;
-    grid-template-columns: 1fr 1fr 0.5fr 2fr;
-    grid-template-areas: "name name nothing weather"
+    grid-template-columns: 0.5fr 1.5fr 0.2fr 47.5%;
+    grid-template-areas: "name name name weather"
     "icons temp nothing weather";
 }
 .home > h2 {
@@ -79,7 +79,7 @@ ul.parameters > li > b {
     justify-content: center;
     /*border: solid 1px red;*/
     grid-area: temp;
-    font-size: 6rem;
+    font-size: 8rem;
 
 }
 
@@ -96,16 +96,14 @@ ul.parameters > li > b {
     font-size: 1.5rem;
 }
 .favorites-ul {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    list-style-type: none;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-column-gap: 5%;
     margin: 0;
     padding: 0;
 }
 .favorites-ul li{
     /*border: solid 1px black;*/
-    margin: .5rem;
     display: grid;
     grid-template-areas:
             "descr"
@@ -115,6 +113,9 @@ ul.parameters > li > b {
 .favorites .description {
     grid-area: descr;
     position: relative;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     /*border: solid 2px green;*/
     max-width: 100%;
     padding: 0 5rem .5rem 0;
@@ -133,25 +134,24 @@ ul.parameters > li > b {
     /*border: solid 1px blue;*/
     display: inline-block;
     font-size: 2rem;
-    margin: 0 .7rem;
+    margin: 0 1rem 0 0;
 }
 .favorites .description p {
     /*border: solid 1px blue;*/
     display: inline-block;
     font-size: 2rem;
-    margin: 0 .7rem;
+    margin: 0 1rem 0;
 }
 .favorites .description img {
     /*border: solid 1px blue;*/
     display: inline-block;
-    max-width: 4rem;
-    position: relative;
-    top: 1rem;
+    max-width: 3rem;
+    margin: 0 auto 0 1rem;
 }
 .favorites button {
     position: absolute;
     right: 0;
-    top: 1.5rem;
+    /*top: 1.5rem;*/
     /*border: solid 1px blue;*/
     display: block;
 }
@@ -159,7 +159,7 @@ ul.parameters > li > b {
 
 .favorites button, .favorites-description button {
     border: none;
-    margin: 0 .7rem;
+    margin: 0 .2rem 0 .7rem;
     background-color: gray;
     color: white;
     width: 3rem;
@@ -185,6 +185,7 @@ ul.parameters > li > b {
         grid-template-areas: "name name"
         "icons temp"
         "weather weather";
+        grid-row-gap: 20px;
     }
     .home > img{
         grid-area: icons;
@@ -195,7 +196,7 @@ ul.parameters > li > b {
         word-wrap: break-word;
         justify-content: center;
         grid-area: temp;
-        font-size: 4rem;
+        font-size: 7rem;
 
     }
     .favorites-ul{
@@ -203,6 +204,9 @@ ul.parameters > li > b {
         list-style-type: none;
         margin: 0;
         padding: 0;
+    }
+    .favorites-ul li {
+        margin-bottom: 20px;
     }
     .favorites-description {
         display: block;
@@ -234,5 +238,11 @@ ul.parameters > li > b {
 @media screen and (max-width: 600px) {
     html {
         font-size: 12px;
+        min-width: 400px;
     }
+}
+@media screen and (min-width: 1800px) {
+.favorites-ul {
+    grid-template-columns: repeat(3, 1fr);
+}
 }
