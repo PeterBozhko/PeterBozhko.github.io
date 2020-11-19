@@ -9,19 +9,24 @@ section, header {
     width: 80%;
     margin: auto;
 }
+header {
+    display: flex;
+}
 header h1{
-    display: inline-block;
-    margin: 0;
+    margin: auto 0;
+    font-size: 2.5rem;
 }
 header button {
+    font-size: 1rem;
     position: absolute;
-    left: 50%;
-    transform: translate(-50%, 0);
+    right: 50%;
+    transform: translateX(50%);
     color: #89969c;
     background: #c9d2d7;
-    padding: 1em 2em;
+    padding: 1em 4em;
     border: none;
     border-radius: .4em;
+    margin: auto;
 }
 header button:hover { background: #a7b0b5; } /* при наведении курсора мышки */
 header button:active { background: #c9d2d7; } /* при нажатии */
@@ -31,6 +36,34 @@ header img {
 }
 img {
     border: solid 2px black;
+}
+.icon{
+    width: 230px;
+    height: 230px;
+    background: url("img/list_weather.jpg");
+    background-size: 400%;
+    border: solid gray 2px;
+}
+.icon-tornado {
+    background-position: 33% -1%;
+}
+.icon-snow {
+    background-position: 61% -3%;
+}
+.icon-partly-sunny {
+    background-position: 92% -5%;
+}
+.icon-cloudy {
+    background-position: 2% 33%;
+}
+.icon-sunny {
+    background-position: 33% 32%;
+}
+.icon-rain {
+    background-position: 2% 67%;
+}
+.icon-rain-sun {
+    background-position: 34% 67%;
 }
 ul.parameters {
     list-style-type: none;
@@ -69,9 +102,10 @@ ul.parameters > li > b {
     grid-area: weather;
 }
 
-.home > img{
+.home .icon{
     grid-area: icons;
     width: 10rem;
+    height: 10rem;
 }
 .home > span{
     display: flex;
@@ -99,6 +133,7 @@ ul.parameters > li > b {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     grid-column-gap: 5%;
+    grid-row-gap: 5%;
     margin: 0;
     padding: 0;
 }
@@ -118,7 +153,6 @@ ul.parameters > li > b {
     align-items: center;
     /*border: solid 2px green;*/
     max-width: 100%;
-    padding: 0 5rem .5rem 0;
 }
 /*.favorites .description::after {*/
 /*    content: "";*/
@@ -142,20 +176,13 @@ ul.parameters > li > b {
     font-size: 2rem;
     margin: 0 1rem 0;
 }
-.favorites .description img {
+.favorites .description .icon {
     /*border: solid 1px blue;*/
     display: inline-block;
-    max-width: 3rem;
+    max-width: 4rem;
+    max-height: 4rem;
     margin: 0 auto 0 1rem;
 }
-.favorites button {
-    position: absolute;
-    right: 0;
-    /*top: 1.5rem;*/
-    /*border: solid 1px blue;*/
-    display: block;
-}
-
 
 .favorites button, .favorites-description button {
     border: none;
@@ -187,16 +214,17 @@ ul.parameters > li > b {
         "weather weather";
         grid-row-gap: 20px;
     }
-    .home > img{
+    .home > .icon{
         grid-area: icons;
-        width: 7rem;
+        width: 6rem;
+        height: 6rem;
     }
     .home > span{
         display: flex;
         word-wrap: break-word;
         justify-content: center;
         grid-area: temp;
-        font-size: 7rem;
+        font-size: 6rem;
 
     }
     .favorites-ul{
@@ -219,8 +247,9 @@ ul.parameters > li > b {
         flex-grow: 1;
     }
     header img {
-        display: inline-block;
-        width: 1.5rem;
+        display: inline-flex;
+        align-items: baseline;
+        width: 3rem;
         color: #89969c;
         background: #c9d2d7;
         padding: 0.5rem;
