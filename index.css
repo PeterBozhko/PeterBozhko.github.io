@@ -90,6 +90,7 @@ ul.parameters > li > b {
     grid-template-columns: 0.5fr 1.5fr 0.2fr 47.5%;
     grid-template-areas: "name name name weather"
     "icons temp nothing weather";
+    min-height: 17rem;
 }
 .home > h2 {
     grid-area: name;
@@ -116,6 +117,33 @@ ul.parameters > li > b {
     font-size: 8rem;
 
 }
+.home-loading {
+    display: grid;
+    grid-template-areas: "name"
+    "icon";
+    align-items: center;
+    min-height: 17rem;
+}
+.home-loading > h2 {
+    grid-area: name;
+    font-size: max(1.5rem, 4vw);
+    max-width: 100%;
+    white-space: nowrap;
+    margin: auto;
+}
+.home-loading > img {
+    grid-area: icon;
+    align-self: start;
+    width: max(2rem, 5vw);
+    /*height: max(2rem, 5vw);*/
+    color: #89969c;
+    background: #c9d2d7;
+    padding: max(0.5rem, 0.5vw) max(2rem, 5vw);
+    margin: 1rem auto;
+}
+.home-loading img:hover { background: #a7b0b5; } /* при наведении курсора мышки */
+.home-loading img:active { background: #c9d2d7; } /* при нажатии */
+
 
 .favorites-description {
     display: flex;
@@ -154,15 +182,10 @@ ul.parameters > li > b {
     /*border: solid 2px green;*/
     max-width: 100%;
 }
-/*.favorites .description::after {*/
-/*    content: "";*/
-/*    display: block;*/
-/*    clear: both;*/
-/*}*/
+
 .favorites .parameters {
     grid-area: param;
-    /*border: solid 1px red;*/
-    max-width: 100%
+    min-height: 17rem;
 }
 .favorites .description h3 {
     /*border: solid 1px blue;*/
