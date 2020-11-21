@@ -8,8 +8,8 @@
 <body>
 <header>
     <h1>Погода здесь</h1>
-    <button>Обновить геолокацию</button>
-    <img src="img/update.png" alt="update">
+    <button class="btn btn-main">Обновить геолокацию</button>
+    <button class="btn btn-mobile"><img src="img/update.png" alt="update"></button>
 </header>
 <main>
     <section class="home">
@@ -24,13 +24,13 @@
             <li><b>Координаты</b>хмммм</li>
         </ul>
     </section>
-    <section class="home-loading">
-        <h2>Подождите, данные загружаются</h2>
-        <img src="img/update.png" alt="update">
+    <section class="loading">
+        <span>Подождите, данные загружаются</span>
+        <button class="btn btn-update"><img src="img/update.png" alt="update"></button>
     </section>
     <section class="favorites-description">
         <h2>Избранное</h2>
-        <label for="new-city"><input type="text" id="new-city" maxlength="15" placeholder="Добавьте новый город"><button name="add">+</button></label>
+        <label for="new-city"><input type="text" id="new-city" maxlength="15" placeholder="Добавьте новый город"><button name="add" class="btn-favorites">+</button></label>
     </section>
     <section class="favorites">
         <ul class="favorites-ul">
@@ -39,7 +39,7 @@
                     <h3>Moscow</h3>
                     <p>8&deg;C</p>
                     <div class="icon icon-cloudy"></div>
-                    <button class="cancel-btn">&times;</button>
+                    <button class="btn-cancel">&times;</button>
                 </div>
                 <ul class="parameters">
                     <li><b>Ветер</b>5 m/s</li>
@@ -50,26 +50,23 @@
                 </ul>
             </li>
             <li>
-                <div class="description">
+                <div class="description description-loading">
                     <h3>Moscow</h3>
                     <p>8&deg;C</p>
                     <div class="icon icon-rain"></div>
-                    <button class="cancel-btn">&times;</button>
+                    <button class="btn-cancel">&times;</button>
                 </div>
-                <ul class="parameters">
-                    <li><b>Ветер</b>5 m/s</li>
-                    <li><b>Облачность</b>Низкая</li>
-                    <li><b>Давление</b>огорооменное</li>
-                    <li><b>Влажность</b>сойдёт %</li>
-                    <li><b>Координаты</b>хмммм</li>
-                </ul>
+                <div class="loading">
+                    <span>Подождите, данные загружаются</span>
+                    <button class="btn btn-update"><img src="img/update.png" alt="update"></button>
+                </div>
             </li>
             <li>
                 <div class="description">
                     <h3>Moscow</h3>
                     <p>8&deg;C</p>
                     <div class="icon icon-rain-sun"></div>
-                    <button class="cancel-btn">&times;</button>
+                    <button class="btn-cancel">&times;</button>
                 </div>
                 <ul class="parameters">
                     <li><b>Ветер</b>5 m/s</li>
@@ -84,7 +81,7 @@
                     <h3>Moscow</h3>
                     <p>8&deg;C</p>
                     <div class="icon icon-partly-sunny"></div>
-                    <button class="cancel-btn">&times;</button>
+                    <button class="btn-cancel">&times;</button>
                 </div>
                 <ul class="parameters">
                     <li><b>Ветер</b>5 m/s</li>
@@ -95,23 +92,26 @@
                 </ul>
             </li>
             <li>
-                <div class="description">
+                <div class="description description-loading">
                     <h3>Moscow</h3>
                     <p>8&deg;C</p>
                     <div class="icon icon-snow"></div>
-                    <button class="cancel-btn">&times;</button>
+                    <button class="btn-cancel">&times;</button>
                 </div>
-                <ul class="parameters">
-                    <li><b>Ветер</b>5 m/s</li>
-                    <li><b>Облачность</b>Низкая</li>
-                    <li><b>Давление</b>огорооменное</li>
-                    <li><b>Влажность</b>сойдёт %</li>
-                    <li><b>Координаты</b>хмммм</li>
-                </ul>
+                <div class="loading">
+                    <span>Подождите, данные загружаются</span>
+                    <button class="btn btn-update"><img src="img/update.png" alt="update"></button>
+                </div>
             </li>
 
         </ul>
     </section>
+    <template id="loading">
+        <div class="loading">
+            <span>Подождите, данные загружаются</span>
+            <button class="btn btn-update"><img src="img/update.png" alt="update"></button>
+        </div>
+    </template>
 </main>
 </body>
 </html>

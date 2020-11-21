@@ -16,7 +16,7 @@ header h1{
     margin: auto 0;
     font-size: 2.5rem;
 }
-header button {
+header .btn-main {
     font-size: 1rem;
     position: absolute;
     right: 50%;
@@ -28,14 +28,26 @@ header button {
     border-radius: .4em;
     margin: auto;
 }
-header button:hover { background: #a7b0b5; } /* при наведении курсора мышки */
-header button:active { background: #c9d2d7; } /* при нажатии */
+header .btn-mobile {
+    display: inline-flex;
+    align-items: baseline;
+    width: 3.5rem;
+    color: #89969c;
+    background: #c9d2d7;
+    padding: 0.5rem;
+    margin-left: 3rem;
+    border: none;
+    border-radius: .4em;
+}
+.btn:hover { background: #a7b0b5; } /* при наведении курсора мышки */
+.btn:active { background: #c9d2d7; } /* при нажатии */
 
-header img {
+header .btn-mobile {
     display: none;
 }
 img {
-    border: solid 2px black;
+    max-width: 100%;
+    height: auto;
 }
 .icon{
     width: 230px;
@@ -117,32 +129,33 @@ ul.parameters > li > b {
     font-size: 8rem;
 
 }
-.home-loading {
+.loading {
     display: grid;
     grid-template-areas: "name"
     "icon";
     align-items: center;
     min-height: 17rem;
 }
-.home-loading > h2 {
+.loading > span {
     grid-area: name;
     font-size: max(1.5rem, 4vw);
-    max-width: 100%;
     white-space: nowrap;
     margin: auto;
 }
-.home-loading > img {
+.loading > .btn-update {
+    box-sizing: content-box;
     grid-area: icon;
+    display: inline-flex;
+    align-items: baseline;
     align-self: start;
-    width: max(2rem, 5vw);
-    /*height: max(2rem, 5vw);*/
+    width: 3.5rem;
     color: #89969c;
     background: #c9d2d7;
-    padding: max(0.5rem, 0.5vw) max(2rem, 5vw);
+    padding: 0.5rem 5rem;
     margin: 1rem auto;
+    /*margin-left: 3rem;*/
+    border: none;
 }
-.home-loading img:hover { background: #a7b0b5; } /* при наведении курсора мышки */
-.home-loading img:active { background: #c9d2d7; } /* при нажатии */
 
 
 .favorites-description {
@@ -171,7 +184,9 @@ ul.parameters > li > b {
     grid-template-areas:
             "descr"
             "param";
-
+}
+.favorites-ul .loading > span{
+    font-size: 1.5rem;
 }
 .favorites .description {
     grid-area: descr;
@@ -206,8 +221,14 @@ ul.parameters > li > b {
     max-height: 4rem;
     margin: 0 auto 0 1rem;
 }
+.favorites .description-loading p{
+    visibility: hidden;
+}
+.favorites .description-loading .icon{
+    visibility: hidden;
+}
 
-.favorites button, .favorites-description button {
+.btn-cancel, .btn-favorites {
     border: none;
     margin: 0 .2rem 0 .7rem;
     background-color: gray;
@@ -217,8 +238,8 @@ ul.parameters > li > b {
     font-size: 2rem;
     border-radius: 50%;
 }
-.favorites button:hover, .favorites-description button:hover { background: lightgray; } /* при наведении курсора мышки */
-.favorites button:active, .favorites-description button:active { background: darkgray;} /* при нажатии */
+.btn-cancel:hover, .btn-favorites:hover { background: lightgray; } /* при наведении курсора мышки */
+.btn-cancel:active, .btn-favorites:active { background: darkgray;} /* при нажатии */
 
 @media screen and (max-width: 1080px) {
     html {
@@ -269,21 +290,10 @@ ul.parameters > li > b {
     .favorites-description input{
         flex-grow: 1;
     }
-    header img {
+    header .btn-mobile {
         display: inline-flex;
-        align-items: baseline;
-        width: 3rem;
-        color: #89969c;
-        background: #c9d2d7;
-        padding: 0.5rem;
-        margin-left: 2rem;
-        border: none;
-        border-radius: .4em;
     }
-    header img:hover { background: #a7b0b5; } /* при наведении курсора мышки */
-    header img:active { background: #c9d2d7; } /* при нажатии */
-
-    header button {
+    header .btn-main {
         display: none;
     }
 }
