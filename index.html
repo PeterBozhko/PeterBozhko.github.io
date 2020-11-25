@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <title>My weather site</title>
     <link rel="stylesheet" href="index.css" type="text/css">
+    <script src="js/script.js"></script>
 </head>
 <body>
 <header>
@@ -30,93 +31,47 @@
     </section>
     <section class="favorites-description">
         <h2>Избранное</h2>
-        <label for="new-city"><input type="text" id="new-city" maxlength="15" placeholder="Добавьте новый город"><button name="add" class="btn-favorites">+</button></label>
+        <label for="new-city"><input type="text" id="new-city" maxlength="15" placeholder="Добавьте новый город"><button name="add" class="btn-favorites" onclick="addCity()">+</button></label>
     </section>
     <section class="favorites">
         <ul class="favorites-ul">
-            <li>
-                <div class="description">
-                    <h3>Moscow</h3>
-                    <p>8&deg;C</p>
-                    <div class="icon icon-cloudy"></div>
-                    <button class="btn-cancel">&times;</button>
-                </div>
-                <ul class="parameters">
-                    <li><b>Ветер</b>5 m/s</li>
-                    <li><b>Облачность</b>Низкая</li>
-                    <li><b>Давление</b>огорооменное</li>
-                    <li><b>Влажность</b>сойдёт %</li>
-                    <li><b>Координаты</b>хмммм</li>
-                </ul>
-            </li>
-            <li>
-                <div class="description description-loading">
-                    <h3>Moscow</h3>
-                    <p>8&deg;C</p>
-                    <div class="icon icon-rain"></div>
-                    <button class="btn-cancel">&times;</button>
-                </div>
-                <div class="loading">
-                    <span>Не удалось загрузить данные</span>
-                    <button class="btn btn-update"><img src="img/update.png" alt="update"></button>
-                </div>
-            </li>
-            <li>
-                <div class="description">
-                    <h3>Moscow</h3>
-                    <p>8&deg;C</p>
-                    <div class="icon icon-rain-sun"></div>
-                    <button class="btn-cancel">&times;</button>
-                </div>
-                <ul class="parameters">
-                    <li><b>Ветер</b>5 m/s</li>
-                    <li><b>Облачность</b>Низкая</li>
-                    <li><b>Давление</b>огорооменное</li>
-                    <li><b>Влажность</b>сойдёт %</li>
-                    <li><b>Координаты</b>хмммм</li>
-                </ul>
-            </li>
-            <li>
-                <div class="description">
-                    <h3>Moscow</h3>
-                    <p>8&deg;C</p>
-                    <div class="icon icon-partly-sunny"></div>
-                    <button class="btn-cancel">&times;</button>
-                </div>
-                <ul class="parameters">
-                    <li><b>Ветер</b>5 m/s</li>
-                    <li><b>Облачность</b>Низкая</li>
-                    <li><b>Давление</b>огорооменное</li>
-                    <li><b>Влажность</b>сойдёт %</li>
-                    <li><b>Координаты</b>хмммм</li>
-                </ul>
-            </li>
-            <li>
-                <div class="description description-loading">
-                    <h3>Moscow</h3>
-                    <p>8&deg;C</p>
-                    <div class="icon icon-snow"></div>
-                    <button class="btn-cancel">&times;</button>
-                </div>
-                <div class="loading">
-                    <span>Подождите, данные загружаются</span>
-                    <button class="btn btn-update"><img src="img/update.png" alt="update"></button>
-                </div>
-            </li>
 
         </ul>
     </section>
+
     <template id="loading">
         <div class="loading">
             <span>Подождите, данные загружаются</span>
             <button class="btn btn-update"><img src="img/update.png" alt="update"></button>
         </div>
     </template>
+
     <template id="error">
         <div class="loading ">
             <span>Не удалось загрузить данные</span>
             <button class="btn btn-error">Попробовать снова</button>
         </div>
+    </template>
+
+    <template id="favorite_city">
+        <li>
+            <div class="description">
+                <h3></h3>
+                <p>&deg;C</p>
+                <div class="icon icon-partly-sunny"></div>
+                <button class="btn-cancel">&times;</button>
+            </div>
+            <ul class="parameters">
+            </ul>
+        </li>
+
+    </template>
+
+    <template id='parameters'>
+        <li>
+            <b class='weather_info_name'></b>
+            <span class='weather_info_value'></span>
+        </li>
     </template>
 </main>
 </body>

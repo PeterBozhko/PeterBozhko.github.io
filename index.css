@@ -71,8 +71,14 @@ img {
 .icon-sunny {
     background-position: 33% 32%;
 }
+.icon-very-cloudy {
+    background-position: 61% 32%;
+}
 .icon-rain {
     background-position: 2% 67%;
+}
+.thunder {
+    background-position: 61% 67%;
 }
 .icon-rain-sun {
     background-position: 34% 67%;
