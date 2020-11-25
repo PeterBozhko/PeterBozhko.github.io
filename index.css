@@ -9,28 +9,79 @@ section, header {
     width: 80%;
     margin: auto;
 }
-header h1{
-    display: inline-block;
-    margin: 0;
+header {
+    display: flex;
 }
-header button {
+header h1{
+    margin: auto 0;
+    font-size: 2.5rem;
+}
+header .btn-main {
+    font-size: 1rem;
     position: absolute;
-    left: 50%;
-    transform: translate(-50%, 0);
+    right: 50%;
+    transform: translateX(50%);
     color: #89969c;
     background: #c9d2d7;
-    padding: 1em 2em;
+    padding: 1em 4em;
+    border: none;
+    border-radius: .4em;
+    margin: auto;
+}
+header .btn-mobile {
+    display: inline-flex;
+    align-items: baseline;
+    width: 3.5rem;
+    color: #89969c;
+    background: #c9d2d7;
+    padding: 0.5rem;
+    margin-left: 3rem;
     border: none;
     border-radius: .4em;
 }
-header button:hover { background: #a7b0b5; } /* при наведении курсора мышки */
-header button:active { background: #c9d2d7; } /* при нажатии */
+.btn:hover { background: #a7b0b5; } /* при наведении курсора мышки */
+.btn:active { background: #c9d2d7; } /* при нажатии */
 
-header img {
+header .btn-mobile {
     display: none;
 }
 img {
-    border: solid 2px black;
+    max-width: 100%;
+    height: auto;
+}
+.icon{
+    width: 230px;
+    height: 230px;
+    background: url("img/list_weather.jpg");
+    background-size: 400%;
+    border: solid gray 2px;
+}
+.icon-tornado {
+    background-position: 33% -1%;
+}
+.icon-snow {
+    background-position: 61% -3%;
+}
+.icon-partly-sunny {
+    background-position: 92% -5%;
+}
+.icon-cloudy {
+    background-position: 2% 33%;
+}
+.icon-sunny {
+    background-position: 33% 32%;
+}
+.icon-very-cloudy {
+    background-position: 63% 32%;
+}
+.icon-rain {
+    background-position: 2% 67%;
+}
+.thunder {
+    background-position: 61% 67%;
+}
+.icon-rain-sun {
+    background-position: 34% 67%;
 }
 ul.parameters {
     list-style-type: none;
@@ -54,9 +105,10 @@ ul.parameters > li > b {
 }
 .home {
     display: grid;
-    grid-template-columns: 1fr 1fr 0.5fr 2fr;
-    grid-template-areas: "name name nothing weather"
+    grid-template-columns: 0.5fr 1.5fr 0.2fr 47.5%;
+    grid-template-areas: "name name name weather"
     "icons temp nothing weather";
+    min-height: 17rem;
 }
 .home > h2 {
     grid-area: name;
@@ -69,9 +121,10 @@ ul.parameters > li > b {
     grid-area: weather;
 }
 
-.home > img{
+.home .icon{
     grid-area: icons;
     width: 10rem;
+    height: 10rem;
 }
 .home > span{
     display: flex;
@@ -79,9 +132,51 @@ ul.parameters > li > b {
     justify-content: center;
     /*border: solid 1px red;*/
     grid-area: temp;
-    font-size: 6rem;
+    font-size: 8rem;
 
 }
+.loading {
+    display: grid;
+    grid-template-areas: "name"
+    "icon";
+    align-items: center;
+    min-height: 17rem;
+}
+.loading > span {
+    grid-area: name;
+    font-size: max(1.7rem, 4vw);
+    font-weight: bold;
+    white-space: nowrap;
+    margin: auto;
+}
+.btn-update {
+    box-sizing: content-box;
+    grid-area: icon;
+    display: inline-flex;
+    align-items: baseline;
+    align-self: start;
+    width: 3.5rem;
+    color: #89969c;
+    background: #c9d2d7;
+    padding: 0.5rem 5rem;
+    margin: 1rem auto;
+    /*margin-left: 3rem;*/
+    border: none;
+}
+.btn-error {
+    grid-area: icon;
+    display: inline-flex;
+    align-items: baseline;
+    align-self: start;
+    color: #89969c;
+    background: #c9d2d7;
+    font-size: 1rem;
+    padding: 1.5rem 3rem;
+    margin: 1rem auto;
+    /*margin-left: 3rem;*/
+    border: none;
+}
+
 
 .favorites-description {
     display: flex;
@@ -96,74 +191,67 @@ ul.parameters > li > b {
     font-size: 1.5rem;
 }
 .favorites-ul {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    list-style-type: none;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-column-gap: 5%;
+    grid-row-gap: 5%;
     margin: 0;
     padding: 0;
 }
 .favorites-ul li{
     /*border: solid 1px black;*/
-    margin: .5rem;
     display: grid;
-    flex-basis: 0;
-    flex-grow: 1;
     grid-template-areas:
             "descr"
             "param";
-
+}
+.favorites-ul .loading > span{
+    font-size: 1.5rem;
+    font-weight: normal;
 }
 .favorites .description {
     grid-area: descr;
     position: relative;
-    white-space: nowrap;
-    max-width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     /*border: solid 2px green;*/
-    padding: 0 5rem .5rem 0;
+    max-width: 100%;
 }
-/*.favorites .description::after {*/
-/*    content: "";*/
-/*    display: block;*/
-/*    clear: both;*/
-/*}*/
+
 .favorites .parameters {
     grid-area: param;
-    /*border: solid 1px red;*/
-    max-width: 100%
+    min-height: 17rem;
 }
 .favorites .description h3 {
     /*border: solid 1px blue;*/
     display: inline-block;
-    font-size: 2rem;
-    margin: 0 .7rem;
+    font-size: 1.8rem;
+    margin: 0 1rem 0 0;
 }
 .favorites .description p {
     /*border: solid 1px blue;*/
     display: inline-block;
     font-size: 2rem;
-    margin: 0 .7rem;
+    margin: 0 1rem 0;
 }
-.favorites .description img {
+.favorites .description .icon {
     /*border: solid 1px blue;*/
     display: inline-block;
-    width: 4rem;
-    height: 4rem;
-    position: relative;
-    top: 1rem;
+    max-width: 4rem;
+    max-height: 4rem;
+    margin: 0 auto 0 1rem;
 }
-.favorites button {
-    position: absolute;
-    right: 0;
-    top: 1.5rem;
-    border: solid 1px blue;
-    display: block;
+.favorites .description-loading p{
+    visibility: hidden;
+}
+.favorites .description-loading .icon{
+    visibility: hidden;
 }
 
-
-.favorites button, .favorites-description button {
+.btn-cancel, .btn-favorites {
     border: none;
-    margin: 0 0 0 .7rem;
+    margin: 0 .2rem 0 .7rem;
     background-color: gray;
     color: white;
     width: 3rem;
@@ -171,8 +259,8 @@ ul.parameters > li > b {
     font-size: 2rem;
     border-radius: 50%;
 }
-.favorites button:hover, .favorites-description button:hover { background: lightgray; } /* при наведении курсора мышки */
-.favorites button:active, .favorites-description button:active { background: darkgray;} /* при нажатии */
+.btn-cancel:hover, .btn-favorites:hover { background: lightgray; } /* при наведении курсора мышки */
+.btn-cancel:active, .btn-favorites:active { background: darkgray;} /* при нажатии */
 
 @media screen and (max-width: 1080px) {
     html {
@@ -189,17 +277,19 @@ ul.parameters > li > b {
         grid-template-areas: "name name"
         "icons temp"
         "weather weather";
+        grid-row-gap: 20px;
     }
-    .home > img{
+    .home > .icon{
         grid-area: icons;
-        width: 7rem;
+        width: 6rem;
+        height: 6rem;
     }
     .home > span{
         display: flex;
         word-wrap: break-word;
         justify-content: center;
         grid-area: temp;
-        font-size: 4rem;
+        font-size: 6rem;
 
     }
     .favorites-ul{
@@ -207,6 +297,9 @@ ul.parameters > li > b {
         list-style-type: none;
         margin: 0;
         padding: 0;
+    }
+    .favorites-ul li {
+        margin-bottom: 20px;
     }
     .favorites-description {
         display: block;
@@ -218,25 +311,21 @@ ul.parameters > li > b {
     .favorites-description input{
         flex-grow: 1;
     }
-    header img {
-        display: inline-block;
-        width: 1.5rem;
-        color: #89969c;
-        background: #c9d2d7;
-        padding: 0.5rem;
-        margin-left: 2rem;
-        border: none;
-        border-radius: .4em;
+    header .btn-mobile {
+        display: inline-flex;
     }
-    header img:hover { background: #a7b0b5; } /* при наведении курсора мышки */
-    header img:active { background: #c9d2d7; } /* при нажатии */
-
-    header button {
+    header .btn-main {
         display: none;
     }
 }
 @media screen and (max-width: 600px) {
     html {
         font-size: 12px;
+        min-width: 400px;
     }
+}
+@media screen and (min-width: 1800px) {
+.favorites-ul {
+    grid-template-columns: repeat(3, 1fr);
+}
 }
