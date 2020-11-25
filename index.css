@@ -201,6 +201,8 @@ ul.parameters > li > b {
 .favorites-ul li{
     /*border: solid 1px black;*/
     display: grid;
+    flex-basis: 0;
+    flex-grow: 1;
     grid-template-areas:
             "descr"
             "param";
