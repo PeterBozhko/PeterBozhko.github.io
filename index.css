@@ -143,7 +143,7 @@ ul.parameters > li > b {
     white-space: nowrap;
     margin: auto;
 }
-.loading > .btn-update {
+.btn-update {
     box-sizing: content-box;
     grid-area: icon;
     display: inline-flex;
@@ -157,7 +157,7 @@ ul.parameters > li > b {
     /*margin-left: 3rem;*/
     border: none;
 }
-.loading > .btn-error {
+.btn-error {
     grid-area: icon;
     display: inline-flex;
     align-items: baseline;
