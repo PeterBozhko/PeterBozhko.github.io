@@ -157,13 +157,8 @@ async function addCity() {
     }
     favoriteCities.push(cityName)
 
-    let card_loader = document.getElementById('favorite_city').content.cloneNode(true);
+    let card_loader = document.getElementById('favorite_city_loading').content.cloneNode(true);
     card_loader.querySelector('h3').innerHTML = cityName;
-    card_loader.querySelector('div.description').className = 'description description-loading'
-
-    let loader = document.getElementById('loading').content.cloneNode(true)
-    card_loader.querySelector("ul.parameters").remove()
-    card_loader.querySelector('li').appendChild(loader)
     card_loader.querySelector('li').id = cityName
 
     document.querySelector('ul.favorites-ul').append(card_loader);
@@ -171,7 +166,8 @@ async function addCity() {
     document.querySelector('ul.favorites-ul').replaceChild(createCityCard(await getWeatherByName(cityName)), document.getElementById(cityName));
 }
 
-function deleteCity(el) {
+function deleteCity(event) {
+    let el = event.currentTarget
     let cityName = el.parentNode.querySelector('h3');
     let index = favoriteCities.indexOf(cityName);
     favoriteCities.splice(index, 1);
