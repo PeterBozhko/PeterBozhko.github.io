@@ -4,9 +4,22 @@ let apiKey = 'a98bacd5e04d94e1bbd3afd506d56bb2';
 let apiLink = 'https://api.openweathermap.org/data/2.5/weather?units=metric&lang=ru&';
 
 window.onload = function (){
-    // localStorage.clear()
+    localStorage.clear()
     loadFavorites()
+    loadHome()
+    initialization()
 }
+
+
+
+function initialization() {
+    for (let btn of document.querySelector('header').getElementsByClassName('btn')){
+        btn.addEventListener('click', updateCoord);
+    }
+
+}
+
+
 
 async function getWeather(url){
     let response = await fetch(url);
@@ -20,6 +33,12 @@ async function getWeather(url){
 
 function getWeatherByName(cityName){
     let requestURL = apiLink + 'q=' + cityName + '&appid=' + apiKey;
+    return getWeather(requestURL);
+}
+
+//api.openweathermap.org/data/2.5/weather?lat={lat}&lon={lon}&appid={API key}
+function getWeatherByCoord(lat, lon){
+    let requestURL = apiLink + '&lat=' + lat + '&lon=' + lon + '&appid=' + apiKey;
     return getWeather(requestURL);
 }
 
@@ -189,4 +208,49 @@ function loadFavorites() {
     for (let cityName of favoriteCities) {
         addCity(cityName);
     }
+}
+
+function loadHome() {
+    let home_loader = document.getElementById('loading').content.cloneNode(true);
+    home_loader.querySelector('div').id = "home"
+    document.querySelector('main').prepend(home_loader)
+    async function showLocation(position) {
+        let dataHome = await getWeatherByCoord(position.coords.latitude, position.coords.longitude)
+        console.log(dataHome)
+        let home = document.getElementById('home_template').content.cloneNode(true);
+        home.querySelector('section').id = "home"
+        home.querySelector('h2').innerHTML = dataHome.name;
+        home.querySelector('span').insertAdjacentHTML('afterbegin', dataHome.main.temp);
+        home.querySelector('div.icon').classList.add('icon-' + weatherIdToIcon(dataHome.weather[0].id));
+        let item;
+        for (item of cityParameters(dataHome)) {
+            home.querySelector('ul.parameters').append(item);
+        }
+        document.querySelector('main').replaceChild(home,document.getElementsByClassName('loading')[0])
+    }
+
+    function errorHandler(err) {
+        if(err.code === 1) {
+            alert("Error: Access is denied!");
+        } else if( err.code === 2) {
+            alert("Error: Position is unavailable!");
+        }
+        let home_error = document.getElementById('error').content.cloneNode(true);
+        home_error.querySelector('div').id = "home"
+        document.querySelector('main').replaceChild(home_error,document.getElementsByClassName('loading')[0])
+    }
+    if(navigator.geolocation) {
+
+        // timeout at 60000 milliseconds (60 seconds)
+        const options = {timeout: 60000};
+        navigator.geolocation.getCurrentPosition(showLocation, errorHandler, options);
+    } else {
+        alert("Sorry, browser does not support geolocation!\n I use a default city (Moscow).");
+        showLocation({"coords": {"latitude": 55.75, "longitude": 37.62}});
+    }
+}
+
+function updateCoord() {
+    document.getElementById('home').remove();
+    loadHome();
 }
