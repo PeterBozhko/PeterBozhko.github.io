@@ -4,7 +4,7 @@ let apiKey = 'a98bacd5e04d94e1bbd3afd506d56bb2';
 let apiLink = 'https://api.openweathermap.org/data/2.5/weather?units=metric&lang=ru&';
 
 window.onload = function (){
-    localStorage.clear()
+    // localStorage.clear()
     loadFavorites()
     loadHome()
     initialization()
@@ -16,7 +16,6 @@ function initialization() {
     for (let btn of document.querySelector('header').getElementsByClassName('btn')){
         btn.addEventListener('click', updateCoord);
     }
-
 }
 
 
@@ -26,7 +25,7 @@ async function getWeather(url){
     if (response.ok) {
         return await response.json()
     } else {
-        alert("Ошибка HTTP: " + response.status);
+        alert("Ошибка связи с API: " + response.status);
         return null
     }
 }
@@ -167,9 +166,7 @@ function createCityCard(data) {
 
 async function addCity(cityName) {
     if (typeof cityName === "undefined"){
-        console.log(cityName)
         cityName = document.getElementById('new-city').value;
-        console.log(cityName)
         if(cityName === ''){
             return;
         }
@@ -190,7 +187,7 @@ async function addCity(cityName) {
 
 function deleteCity(event) {
     let el = event.currentTarget
-    let cityName = el.parentNode.querySelector('h3');
+    let cityName = el.parentNode.querySelector('h3').innerHTML;
     let index = favoriteCities.indexOf(cityName);
     favoriteCities.splice(index, 1);
     localStorage.setItem('favoriteList', JSON.stringify(favoriteCities));
@@ -216,7 +213,6 @@ function loadHome() {
     document.querySelector('main').prepend(home_loader)
     async function showLocation(position) {
         let dataHome = await getWeatherByCoord(position.coords.latitude, position.coords.longitude)
-        console.log(dataHome)
         let home = document.getElementById('home_template').content.cloneNode(true);
         home.querySelector('section').id = "home"
         home.querySelector('h2').innerHTML = dataHome.name;
