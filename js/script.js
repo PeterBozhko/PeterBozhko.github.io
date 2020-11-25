@@ -143,7 +143,7 @@ function createCityCard(data) {
     for (item of cityParameters(data)) {
         card.querySelector('ul.parameters').append(item);
     }
-    document.getElementsByClassName('favorites-ul')[0].append(card);
+    return card
 }
 
 async function addCity() {
@@ -164,11 +164,11 @@ async function addCity() {
     let loader = document.getElementById('loading').content.cloneNode(true)
     card_loader.querySelector("ul.parameters").remove()
     card_loader.querySelector('li').appendChild(loader)
+    card_loader.querySelector('li').id = cityName
 
     document.querySelector('ul.favorites-ul').append(card_loader);
-
-    createCityCard(await getWeatherByName(cityName));
     localStorage.setItem('favoriteList', JSON.stringify(favoriteCities));
+    document.querySelector('ul.favorites-ul').replaceChild(createCityCard(await getWeatherByName(cityName)), document.getElementById(cityName));
 }
 
 function deleteCity(el) {
