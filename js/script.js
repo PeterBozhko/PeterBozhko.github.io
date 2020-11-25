@@ -4,7 +4,7 @@ let apiKey = 'a98bacd5e04d94e1bbd3afd506d56bb2';
 let apiLink = 'https://api.openweathermap.org/data/2.5/weather?units=metric&lang=ru&';
 
 window.onload = function (){
-    localStorage.clear()
+    // localStorage.clear()
     loadFavorites()
 }
 
@@ -23,52 +23,52 @@ function getWeatherByName(cityName){
     return getWeather(requestURL);
 }
 
-function recieveWeatherData(cityName) {
-    return {
-  "coord": {
-    "lon": -122.08,
-    "lat": 37.39
-  },
-  "weather": [
-    {
-      "id": 800,
-      "main": "Clear",
-      "description": "clear sky",
-      "icon": "01d"
-    }
-  ],
-  "base": "stations",
-  "main": {
-    "temp": 282.55,
-    "feels_like": 281.86,
-    "temp_min": 280.37,
-    "temp_max": 284.26,
-    "pressure": 1023,
-    "humidity": 100
-  },
-  "visibility": 16093,
-  "wind": {
-    "speed": 1.5,
-    "deg": 350
-  },
-  "clouds": {
-    "all": 1
-  },
-  "dt": 1560350645,
-  "sys": {
-    "type": 1,
-    "id": 5122,
-    "message": 0.0139,
-    "country": "US",
-    "sunrise": 1560343627,
-    "sunset": 1560396563
-  },
-  "timezone": -25200,
-  "id": 420006353,
-  "name": "Mountain View",
-  "cod": 200
-  };
-}
+// function recieveWeatherData(cityName) {
+//     return {
+//   "coord": {
+//     "lon": -122.08,
+//     "lat": 37.39
+//   },
+//   "weather": [
+//     {
+//       "id": 800,
+//       "main": "Clear",
+//       "description": "clear sky",
+//       "icon": "01d"
+//     }
+//   ],
+//   "base": "stations",
+//   "main": {
+//     "temp": 282.55,
+//     "feels_like": 281.86,
+//     "temp_min": 280.37,
+//     "temp_max": 284.26,
+//     "pressure": 1023,
+//     "humidity": 100
+//   },
+//   "visibility": 16093,
+//   "wind": {
+//     "speed": 1.5,
+//     "deg": 350
+//   },
+//   "clouds": {
+//     "all": 1
+//   },
+//   "dt": 1560350645,
+//   "sys": {
+//     "type": 1,
+//     "id": 5122,
+//     "message": 0.0139,
+//     "country": "US",
+//     "sunrise": 1560343627,
+//     "sunset": 1560396563
+//   },
+//   "timezone": -25200,
+//   "id": 420006353,
+//   "name": "Mountain View",
+//   "cod": 200
+//   };
+// }
 function weatherIdToIcon(id){
     if(id === 800)
         return 'sunny';
@@ -134,7 +134,7 @@ function cityParameters(data) {
  */
 function createCityCard(data) {
     let card = document.getElementById('favorite_city').content.cloneNode(true);
-    card.querySelector('li').setAttribute('data-city_id', data.id);
+    card.querySelector('li').id = data.name;
     card.querySelector('h3').innerHTML = data.name;
     card.querySelector('p').insertAdjacentHTML('afterbegin', data.main.temp);
     card.querySelector('div.icon').classList.add('icon-' + weatherIdToIcon(data.weather[0].id));
@@ -146,23 +146,26 @@ function createCityCard(data) {
     return card
 }
 
-async function addCity() {
-    let cityName = document.getElementById('new-city').value;
-    if(cityName === ''){
-        return;
+async function addCity(cityName) {
+    if (typeof cityName === "undefined"){
+        console.log(cityName)
+        cityName = document.getElementById('new-city').value;
+        console.log(cityName)
+        if(cityName === ''){
+            return;
+        }
+        if(favoriteCities.includes(cityName)) {
+            alert('Город уже есть в списке');
+            return;
+        }
+        favoriteCities.push(cityName)
+        localStorage.setItem('favoriteList', JSON.stringify(favoriteCities));
     }
-    if(favoriteCities.includes(cityName)) {
-        alert('Город уже есть в списке');
-        return;
-    }
-    favoriteCities.push(cityName)
-
     let card_loader = document.getElementById('favorite_city_loading').content.cloneNode(true);
     card_loader.querySelector('h3').innerHTML = cityName;
     card_loader.querySelector('li').id = cityName
 
     document.querySelector('ul.favorites-ul').append(card_loader);
-    localStorage.setItem('favoriteList', JSON.stringify(favoriteCities));
     document.querySelector('ul.favorites-ul').replaceChild(createCityCard(await getWeatherByName(cityName)), document.getElementById(cityName));
 }
 
@@ -184,7 +187,6 @@ function loadFavorites() {
     favoriteCities = JSON.parse(localStorage.getItem('favoriteList'));
     console.log(favoriteCities);
     for (let cityName of favoriteCities) {
-        console.log(cityName);
-        createCityCard(getWeatherByName(cityName));
+        addCity(cityName);
     }
 }

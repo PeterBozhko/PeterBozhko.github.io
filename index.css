@@ -226,7 +226,7 @@ ul.parameters > li > b {
 .favorites .description h3 {
     /*border: solid 1px blue;*/
     display: inline-block;
-    font-size: 2rem;
+    font-size: 1.8rem;
     margin: 0 1rem 0 0;
 }
 .favorites .description p {
