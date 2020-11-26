@@ -227,7 +227,9 @@ function loadHome() {
 
     function errorHandler(err) {
         if(err.code === 1) {
-            alert("Error: Access is denied!");
+            alert("Error: Доступ к геоданным запрещен!");
+            showLocation({"coords": {"latitude": 55.75, "longitude": 37.62}});
+            return;
         } else if( err.code === 2) {
             alert("Error: Position is unavailable!");
         }
