@@ -235,6 +235,7 @@ function loadHome() {
         }
         let home_error = document.getElementById('error').content.cloneNode(true);
         home_error.querySelector('div').id = "home"
+        home_error.querySelector('button').addEventListener("click", updateCoord)
         document.querySelector('main').replaceChild(home_error,document.getElementsByClassName('loading')[0])
     }
     if(navigator.geolocation) {
