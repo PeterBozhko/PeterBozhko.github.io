@@ -227,11 +227,11 @@ function loadHome() {
 
     function errorHandler(err) {
         if(err.code === 1) {
-            alert("Error: Доступ к геоданным запрещен!");
+            alert("Ошибка: Доступ к геоданным запрещен.\nИспользован город по умолчанию (Москва).");
             showLocation({"coords": {"latitude": 55.75, "longitude": 37.62}});
             return;
         } else if( err.code === 2) {
-            alert("Error: Position is unavailable!");
+            alert("Ошибка: Позиция невозможна");
         }
         let home_error = document.getElementById('error').content.cloneNode(true);
         home_error.querySelector('div').id = "home"
@@ -244,7 +244,7 @@ function loadHome() {
         const options = {timeout: 60000};
         navigator.geolocation.getCurrentPosition(showLocation, errorHandler, options);
     } else {
-        alert("Sorry, browser does not support geolocation!\n I use a default city (Moscow).");
+        alert("Браузер не поддерживает геолокацию!\n Использован город по умолчанию (Москва).");
         showLocation({"coords": {"latitude": 55.75, "longitude": 37.62}});
     }
 }
