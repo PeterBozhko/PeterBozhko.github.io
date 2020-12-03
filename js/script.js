@@ -224,8 +224,9 @@ async function loadFavorites() {
         try {
             data = await getWeatherByName(cityName);
         } catch (err) {
-            document.querySelector('ul.favorites-ul').removeChild(document.getElementById(cityName));
-            alert('Не удалось загрузить информацию');
+            let error = document.getElementById('error').content.cloneNode(true);
+            error.querySelector('button').addEventListener("click", updateCity)
+            document.getElementById(cityName).replaceChild(error,document.getElementById(cityName).getElementsByClassName('loading')[0])
             continue;
         }
         document.querySelector('ul.favorites-ul').replaceChild(createCityCard(data), document.getElementById(cityName));
@@ -283,4 +284,22 @@ function loadHome() {
 function updateCoord() {
     document.getElementById('home').remove();
     loadHome();
+}
+
+async function updateCity(event) {
+    let cityCard = event.target.parentNode.parentNode
+    let cityName = cityCard.id
+    let data;
+    let loading = document.getElementById('loading').content.cloneNode(true);
+    document.getElementById(cityName).replaceChild(loading,document.getElementById(cityName).getElementsByClassName('loading')[0])
+    try {
+        data = await getWeatherByName(cityName);
+    } catch (err) {
+        let error = document.getElementById('error').content.cloneNode(true);
+        error.querySelector('button').addEventListener("click", updateCity)
+        document.getElementById(cityName).replaceChild(error,document.getElementById(cityName).getElementsByClassName('loading')[0])
+        alert('Не удалось загрузить информацию');
+        return;
+    }
+    document.querySelector('ul.favorites-ul').replaceChild(createCityCard(data), document.getElementById(cityName));
 }
