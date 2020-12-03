@@ -237,7 +237,13 @@ function loadHome() {
     home_loader.querySelector('div').id = "home"
     document.querySelector('main').prepend(home_loader)
     async function showLocation(position) {
-        let dataHome = await getWeatherByCoord(position.coords.latitude, position.coords.longitude)
+        let dataHome;
+        try {
+            dataHome = await getWeatherByCoord(position.coords.latitude, position.coords.longitude)
+        }
+        catch (err) {
+            errorHandler(err)
+        }
         let home = document.getElementById('home_template').content.cloneNode(true);
         home.querySelector('section').id = "home"
         home.querySelector('h2').innerHTML = dataHome.name;
