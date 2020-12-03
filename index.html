@@ -15,7 +15,11 @@
 <main>
     <section class="favorites-description">
         <h2>Избранное</h2>
-        <label for="new-city"><input type="text" id="new-city" maxlength="16" placeholder="Добавьте новый город"><button name="add" class="btn-favorites" onclick="addCity()">+</button></label>
+        <form>
+            <label for="new-city"></label>
+            <input name="new-city" type="text" id="new-city" maxlength="16" placeholder="Добавьте новый город"/>
+            <button type="submit" class="btn-favorites">+</button>
+        </form>
     </section>
     <section class="favorites">
         <ul class="favorites-ul">
@@ -83,6 +87,7 @@
             </ul>
         </section>
     </template>
+
 </main>
 </body>
 </html>

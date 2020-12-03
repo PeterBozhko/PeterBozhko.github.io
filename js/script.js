@@ -16,6 +16,8 @@ function initialization() {
     for (let btn of document.querySelector('header').getElementsByClassName('btn')){
         btn.addEventListener('click', updateCoord);
     }
+    let form = document.querySelector("form");
+    form.addEventListener("submit", addCity);
 }
 
 
@@ -25,8 +27,7 @@ async function getWeather(url){
     if (response.ok) {
         return await response.json()
     } else {
-        alert("Ошибка связи с API: " + response.status);
-        return null
+        throw "error"
     }
 }
 
@@ -164,25 +165,34 @@ function createCityCard(data) {
     return card
 }
 
-async function addCity(cityName) {
-    if (typeof cityName === "undefined"){
-        cityName = document.getElementById('new-city').value;
-        if(cityName === ''){
-            return;
-        }
-        if(favoriteCities.includes(cityName)) {
-            alert('Город уже есть в списке');
-            return;
-        }
-        favoriteCities.push(cityName)
-        localStorage.setItem('favoriteList', JSON.stringify(favoriteCities));
-    }
+async function addCity(event) {
+    event.preventDefault()
+    let input = event.currentTarget.querySelector('input')
+    let cityName = input.value.toLowerCase()
+    input.value = '';
+
     let card_loader = document.getElementById('favorite_city_loading').content.cloneNode(true);
     card_loader.querySelector('h3').innerHTML = cityName;
     card_loader.querySelector('li').id = cityName
-
+    card_loader.querySelector('button').addEventListener('click', deleteCity);
     document.querySelector('ul.favorites-ul').append(card_loader);
-    document.querySelector('ul.favorites-ul').replaceChild(createCityCard(await getWeatherByName(cityName)), document.getElementById(cityName));
+    let data;
+    try {
+        data = await getWeatherByName(cityName);
+    } catch (err) {
+        await document.querySelector('ul.favorites-ul').removeChild(document.getElementById(cityName));
+        alert('Не удалось загрузить информацию');
+        return;
+    }
+    if (favoriteCities.includes(data.name)) {
+        await document.querySelector('ul.favorites-ul').removeChild(document.getElementById(cityName));
+        alert('Город уже в списке');
+    }
+    else {
+        document.querySelector('ul.favorites-ul').replaceChild(createCityCard(data), document.getElementById(cityName));
+        favoriteCities.push(data.name)
+        localStorage.setItem('favoriteList', JSON.stringify(favoriteCities));
+    }
 }
 
 function deleteCity(event) {
@@ -195,7 +205,7 @@ function deleteCity(event) {
     card.parentNode.removeChild(card);
 }
 
-function loadFavorites() {
+async function loadFavorites() {
     if (localStorage.getItem('favoriteList') === null) {
         favoriteCities = [];
         return;
@@ -203,7 +213,22 @@ function loadFavorites() {
     favoriteCities = JSON.parse(localStorage.getItem('favoriteList'));
     console.log(favoriteCities);
     for (let cityName of favoriteCities) {
-        addCity(cityName);
+        let card_loader = document.getElementById('favorite_city_loading').content.cloneNode(true);
+        card_loader.querySelector('h3').innerHTML = cityName;
+        card_loader.querySelector('li').id = cityName
+        card_loader.querySelector('button').addEventListener('click', deleteCity);
+        document.querySelector('ul.favorites-ul').append(card_loader);
+    }
+    let data;
+    for (let cityName of favoriteCities) {
+        try {
+            data = await getWeatherByName(cityName);
+        } catch (err) {
+            document.querySelector('ul.favorites-ul').removeChild(document.getElementById(cityName));
+            alert('Не удалось загрузить информацию');
+            return;
+        }
+        document.querySelector('ul.favorites-ul').replaceChild(createCityCard(data), document.getElementById(cityName));
     }
 }
 
