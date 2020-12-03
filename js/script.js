@@ -226,7 +226,7 @@ async function loadFavorites() {
         } catch (err) {
             document.querySelector('ul.favorites-ul').removeChild(document.getElementById(cityName));
             alert('Не удалось загрузить информацию');
-            return;
+            continue;
         }
         document.querySelector('ul.favorites-ul').replaceChild(createCityCard(data), document.getElementById(cityName));
     }
@@ -239,10 +239,11 @@ function loadHome() {
     async function showLocation(position) {
         let dataHome;
         try {
-            dataHome = await getWeatherByCoord(position.coords.latitude, position.coords.longitude)
+            dataHome = await getWeatherByCoord(position.coords.latitude, position.coords.longitude);
         }
         catch (err) {
-            errorHandler(err)
+            errorHandler(err);
+            return;
         }
         let home = document.getElementById('home_template').content.cloneNode(true);
         home.querySelector('section').id = "home"
@@ -260,7 +261,6 @@ function loadHome() {
         if(err.code === 1) {
             alert("Ошибка: Доступ к геоданным запрещен.\nИспользован город по умолчанию (Москва).");
             showLocation({"coords": {"latitude": 55.75, "longitude": 37.62}});
-            return;
         } else if( err.code === 2) {
             alert("Ошибка: Позиция невозможна");
         }
