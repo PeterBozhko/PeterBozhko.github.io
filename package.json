@@ -1,0 +1,25 @@
+{
+  "name": "web_dev",
+  "version": "1.0.0",
+  "description": "lab3",
+  "main": "server.js",
+  "dependencies": {
+    "express": "^4.17.1"
+  },
+  "devDependencies": {
+    "cors": "^2.8.5"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/PeterBozhko/PeterBozhko.github.io.git"
+  },
+  "author": "Peter Bozhko <peterbozhko@gmail.com>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/PeterBozhko/PeterBozhko.github.io/issues"
+  },
+  "homepage": "https://github.com/PeterBozhko/PeterBozhko.github.io#readme"
+}

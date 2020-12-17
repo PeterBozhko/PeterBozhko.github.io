@@ -1,10 +1,7 @@
 
-.idea/codeStyles/codeStyleConfig.xml
+.idea/
 
-.idea/modules.xml
+node_modules/
 
-.idea/vcs.xml
 
-.idea/web_dev.iml
-
-.idea/workspace.xml
+Ошибки.txt
