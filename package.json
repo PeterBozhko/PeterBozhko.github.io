@@ -4,9 +4,14 @@
   "description": "lab3",
   "main": "server.js",
   "dependencies": {
-    "express": "^4.17.1"
+    "express": "^4.17.1",
+    "mssql": "^6.3.0",
+    "nedb": "^1.8.0",
+    "node-fetch": "^2.6.1",
+    "rand-token": "^1.0.1"
   },
   "devDependencies": {
+    "cookie-parser": "^1.4.5",
     "cors": "^2.8.5"
   },
   "scripts": {
