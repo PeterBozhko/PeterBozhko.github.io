@@ -46,12 +46,12 @@ const cookieOptions = {
 
 app.get('/weather/city', cors(corsOptions), function (req, res) {
     console.log("GET /weather/city = " + req.query.q);
-    res.json(getWeatherByName(req.query.q));
+    getWeatherByName(encodeURI(req.query.q)).then(r => res.json(r));
 })
 
 app.get('/weather/coordinates', cors(corsOptions), function (req, res) {
     console.log("GET /weather/coordinates = " + req.query.lat + " " + req.query.lon);
-    res.json(getWeatherByCoord(req.query.lat, req.query.lon));
+    getWeatherByCoord(req.query.lat, req.query.lon).then(r => res.json(r));
 })
 app.get('/favourites', cors(corsOptions), function (req, res) {
     let userKey = req.cookies.userKey
@@ -71,7 +71,7 @@ app.get('/favourites', cors(corsOptions), function (req, res) {
 })
 
 app.post('/favourites/:city', cors(corsOptions), async (req, res) => {
-    const city = req.params.city
+    const city = encodeURI(req.params.city)
     const weather = await getWeatherByName(city)
     let userKey = req.cookies.userKey
     if(typeof(userKey) == 'undefined') {
@@ -142,7 +142,6 @@ async function getWeather(url){
     let data
     if (response.ok) {
         data = await response.json()
-
     } else {
         data = null
     }
