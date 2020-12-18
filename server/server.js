@@ -172,7 +172,8 @@ function createAnswer(data) {
             "deg": data.wind.deg
         },
         "weather" : data.weather[0].id,
-        "success" : true
+        "success" : true,
+        "message": ""
     }
-    else return {"success" : false}
+    else return {"success" : false, "message" : "API не отвечает"}
 }

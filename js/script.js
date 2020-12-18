@@ -1,7 +1,4 @@
-let favoriteCities;
-
 window.onload = function (){
-    localStorage.clear()
     loadFavorites()
     loadHome()
     initialization()
@@ -20,9 +17,14 @@ function initialization() {
 async function getWeather(url, method){
     let response = await fetch(url, { method: method, credentials: 'include', secure: true});
     if (response.ok) {
-        return await response.json()
+        let res = await response.json()
+        if (res.success){
+            return res
+        } else {
+            throw res.message
+        }
     } else {
-        throw "error"
+        throw "Нет связи с сервером"
     }
 }
 
@@ -186,35 +188,28 @@ async function addCity(event) {
     document.querySelector('ul.favorites-ul').append(card_loader);
     let data;
     try {
-        data = await getWeatherByName(cityName);
+        data = await putFavourite(cityName)
+        if (data.message){
+            throw "Такой город уже существует"
+        }
+        document.querySelector('ul.favorites-ul').replaceChild(createCityCard(data), document.getElementById(cityName));
     } catch (err) {
         await document.querySelector('ul.favorites-ul').removeChild(document.getElementById(cityName));
-        alert('Не удалось загрузить информацию');
-        return;
-    }
-    if (favoriteCities.includes(data.name)) {
-        await document.querySelector('ul.favorites-ul').removeChild(document.getElementById(cityName));
-        alert('Город уже в списке');
-    }
-    else {
-        document.querySelector('ul.favorites-ul').replaceChild(createCityCard(data), document.getElementById(cityName));
-        favoriteCities.push(data.name)
-        await putFavourite(data.name)
+        alert('Ошибка: ' + err);
     }
 }
 
 function deleteCity(event) {
     let el = event.currentTarget
     let cityName = el.parentNode.querySelector('h3').innerHTML;
-    let index = favoriteCities.indexOf(cityName);
-    favoriteCities.splice(index, 1);
     deleteFavourite(cityName)
     let card = el.parentNode.parentNode;
     card.parentNode.removeChild(card);
 }
 
 async function loadFavorites() {
-    favoriteCities = await getFavourites().then(r => favoriteCities = r.cities)
+    let favoriteCities
+    await getFavourites().then(r => {favoriteCities = r.cities})
     console.log("favoriteCities " + favoriteCities);
     for (let cityName of favoriteCities) {
         let card_loader = document.getElementById('favorite_city_loading').content.cloneNode(true);
