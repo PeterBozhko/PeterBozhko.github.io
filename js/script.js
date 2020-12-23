@@ -195,7 +195,11 @@ async function addCity(event) {
         document.querySelector('ul.favorites-ul').replaceChild(createCityCard(data), document.getElementById(cityName));
     } catch (err) {
         await document.querySelector('ul.favorites-ul').removeChild(document.getElementById(cityName));
-        alert('Ошибка: ' + err);
+        if (err instanceof TypeError) {
+            alert('Ошибка: ' + "Нет связи с сервером или интернета");
+        } else {
+            alert('Ошибка: ' + err);
+        }
     }
 }
 

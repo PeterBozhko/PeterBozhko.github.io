@@ -175,5 +175,5 @@ function createAnswer(data) {
         "success" : true,
         "message": ""
     }
-    else return {"success" : false, "message" : "API не отвечает"}
+    else return {"success" : false, "message" : "API не отвечает, скорее всего город не существует"}
 }
