@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+<!--    <link rel="import" href="../index.html">-->
+    <!-- подключаем стили Mocha, для отображения результатов -->
+    <link rel="stylesheet" href="https://unpkg.com/mocha/mocha.css" />
+    <script src="https://unpkg.com/chai/chai.js"></script>
+    <script src="https://unpkg.com/sinon/pkg/sinon.js"></script>
+    <script src="https://unpkg.com/mocha/mocha.js"></script>
+    <script>
+        // let doc = document.querySelector('link[rel="import"]').import;
+        // for (let child of doc.querySelectorAll("template")) {
+        //     document.body.appendChild(child.cloneNode(true));
+        // }
+        mocha.setup('bdd');
+    </script>
+</head>
+
+<body>
+<script src="../js/script.js"></script>
+<!-- в этом скрипте находятся спеки -->
+<script src="test.js"></script>
+
+<!-- в элементе с id="mocha" будут результаты тестов -->
+<div id="mocha"></div>
+
+<!-- запустить тесты! -->
+<script>
+    mocha.run();
+</script>
+<div style="visibility: hidden">
+    <section class="favorites-description">
+    <h2>Избранное</h2>
+    <form>
+        <label for="new-city"></label>
+        <input name="new-city" type="text" id="new-city" maxlength="16" placeholder="Добавьте новый город"/>
+        <button type="submit" class="btn-favorites">+</button>
+    </form>
+</section>
+    <section class="favorites">
+        <ul class="favorites-ul">
+
+        </ul>
+    </section>
+</div>
+
+<template id="loading">
+    <div class="loading">
+        <span>Подождите, данные загружаются</span>
+        <button class="btn btn-update"><img src="img/update.png" alt="update"></button>
+    </div>
+</template>
+
+<template id="error">
+    <div class="loading">
+        <span>Не удалось загрузить данные</span>
+        <button class="btn btn-error">Попробовать снова</button>
+    </div>
+</template>
+
+<template id="favorite_city">
+    <li>
+        <div class="description">
+            <h3></h3>
+            <p>&deg;C</p>
+            <div class="icon icon-partly-sunny"></div>
+            <button class="btn-cancel">&times;</button>
+        </div>
+        <ul class="parameters">
+        </ul>
+    </li>
+
+</template>
+
+<template id="favorite_city_loading">
+    <li>
+        <div class="description description-loading">
+            <h3></h3>
+            <p>&deg;C</p>
+            <div class="icon icon-partly-sunny"></div>
+            <button class="btn-cancel">&times;</button>
+        </div>
+        <div class="loading">
+            <span>Подождите, данные загружаются</span>
+            <button class="btn btn-update"><img src="img/update.png" alt="update"></button>
+        </div>
+    </li>
+
+</template>
+
+<template id='parameters'>
+    <li>
+        <b class='weather_info_name'></b>
+        <span class='weather_info_value'></span>
+    </li>
+</template>
+
+<template id="home_template">
+    <section class="home">
+        <h2></h2>
+        <span>&deg;C</span>
+        <div class="icon"> </div>
+        <ul class="parameters">
+        </ul>
+    </section>
+</template>
+</body>
+
+</html>

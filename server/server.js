@@ -45,13 +45,24 @@ const cookieOptions = {
 }
 
 app.get('/weather/city', cors(corsOptions), function (req, res) {
-    console.log("GET /weather/city = " + req.query.q);
-    getWeatherByName(encodeURI(req.query.q)).then(r => res.json(r));
+    const q = req.query.q
+    if (typeof q !== 'string') {
+        res.status(422).end()
+        return
+    }
+    console.log("GET /weather/city = " + q);
+    getWeatherByName(encodeURI(q)).then(r => res.json(r));
 })
 
 app.get('/weather/coordinates', cors(corsOptions), function (req, res) {
-    console.log("GET /weather/coordinates = " + req.query.lat + " " + req.query.lon);
-    getWeatherByCoord(req.query.lat, req.query.lon).then(r => res.json(r));
+    const lat = req.query.lat
+    const lon = req.query.lon
+    if (typeof lat !== 'string' || typeof lon !== 'string') {
+        res.status(422).end()
+        return
+    }
+    console.log("GET /weather/coordinates = " + lat + " " + lon);
+    getWeatherByCoord(lat, lon).then(r => res.json(r));
 })
 app.get('/favourites', cors(corsOptions), function (req, res) {
     let userKey = req.cookies.userKey
@@ -133,9 +144,7 @@ app.delete('/favourites/:city', cors(corsOptions), (req, res) => {
 })
 
 let server;
-server = app.listen(port, host, function () {
-    console.log("Server started at http://%s:%s", host, port)
-});
+server = app.listen(port, host);
 
 async function getWeather(url){
     let response = await fetch(url);
@@ -177,3 +186,4 @@ function createAnswer(data) {
     }
     else return {"success" : false, "message" : "API не отвечает, скорее всего город не существует"}
 }
+module.exports = { app, getWeatherByName, getWeather};

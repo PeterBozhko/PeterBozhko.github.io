@@ -213,7 +213,8 @@ function deleteCity(event) {
 
 async function loadFavorites() {
     let favoriteCities
-    await getFavourites().then(r => {favoriteCities = r.cities})
+    let r = await getFavourites()
+    favoriteCities = r.cities
     console.log("favoriteCities " + favoriteCities);
     for (let cityName of favoriteCities) {
         let card_loader = document.getElementById('favorite_city_loading').content.cloneNode(true);
