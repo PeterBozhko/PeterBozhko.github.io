@@ -2,7 +2,6 @@ const server = require('./server');
 const sinon = require('sinon')
 const chai = require('chai')
 const chaiHttp = require('chai-http')
-const {json} = require("mocha");
 chai.use(chaiHttp);
 const { request } = chai
 const sampleResponse = {
@@ -51,85 +50,114 @@ const sampleResponse = {
 };
 
 
-////Sinon //////////////////////////////////////////////////
-
-beforeEach(() => {
-    let stub = sinon.stub(server, 'getWeather').returns(sampleResponse);
+beforeEach(async () => {
+    await sinon.stub(server, 'getWeather').returns(sampleResponse);
+    await sinon.stub(server, 'getWeatherByName').returns(sampleResponse);
+    await sinon.stub(server, 'getWeatherByCoord').returns(sampleResponse);
 });
 
 afterEach(() => {
-    server.getWeather.restore();  //remove stub
+    server.getWeather.restore();
+    server.getWeatherByName.restore();
+    server.getWeatherByCoord.restore();
 });
-/////////////////////////////////////////////////
 
 
-test("test1", () => {
-
-    let s = sinon.stub(server, "getWeatherByName").returns({ id: 0})
-    expect(server.getWeatherByName("Moskow")).toEqual({ id: 0})
-    s.restore()
-});
-test("test2", () => {
-    let req = server.getWeather("Moskow")
+test("test stub", () => {
+    let req = server.getWeather("Moscow")
     expect(req).toEqual(sampleResponse)
 });
 
-test("Should return 200", () => {
+test("Should return 200 (city)", (done) => {
             request(server.app)
                 .get('/weather/city?q=Moscow')
                 .end((err, res) => {
                     expect(res.status).toEqual(200)
-                    expect(res.text).toEqual(sampleResponse)
+                    done()
                 })
 });
 
-test('Should return 422 (missing query)', () => {
+test('Should return 422 (missing query)', (done) => {
     request(server.app)
         .get('/weather/city')
         .end((err, res) => {
             expect(res.status).toEqual(422)
+            done()
         })
 });
 
-test("Should return 200", () => {
+test("Should return 200 (coordinates)", (done) => {
     request(server.app)
         .get('/weather/coordinates?lat=33.33&lon=34.34')
         .end((err, res) => {
             expect(res.status).toEqual(200)
-            expect(res).toEqual(sampleResponse)
+            chai.expect(res).to.be.json
+            done()
         })
 });
-test("Should return 422 (missing lat)", () => {
+test("Should return 422 (missing lat)", (done) => {
     request(server.app)
         .get('/weather/coordinates?lon=34.34')
         .end((err, res) => {
             expect(res.status).toEqual(422)
+            done()
         })
 });
-test("Should return 422 (missing lon)", () => {
+test("Should return 422 (missing lon)", (done) => {
     request(server.app)
         .get('/weather/coordinates?lat=33.33')
         .end((err, res) => {
             expect(res.status).toEqual(422)
+            done()
         })
 });
 
-// test("Should return []", () => {
-//     request(server.app)
-//         .get('/favourites')
-//         .end((err, res) => {
-//             expect(res.status).toEqual(200)
-//             expect(res).toEqual({ "success": true, "cities": []})
-//         })
-// });
-//
-// test("Should return cityName", () => {
-//     request(server.app).post('/favourites/:cityName')
-//     request(server.app)
-//         .get('/favourites')
-//         .end((err, res) => {
-//             expect(res.status).toEqual(200)
-//             expect(res).toEqual({ "success": true, "cities": []})
-//         })
-// });
+test("Should return []", (done) => {
+    request(server.app)
+        .get('/favourites')
+        .end((err, res) => {
+            expect(res.status).toEqual(200)
+            chai.expect(res).to.be.json
+            chai.expect(res.body).to.have.property('success', true)
+            done()
+        })
+});
+test("Should return 200 (add)", (done) => {
+    request(server.app)
+        .post('/favourites/Moscow')
+        .end((err, res) => {
+            expect(res.status).toEqual(200)
+            chai.expect(res).to.be.json
+            chai.expect(res.body).to.have.property('success', true)
+            done()
+        })
+});
+test("Should return 404 (missing param)", (done) => {
+    request(server.app)
+        .post('/favourites/')
+        .end((err, res) => {
+            expect(res.status).toEqual(404)
+            done()
+        })
+});
+
+test("Should return 404 (missing param)", (done) => {
+    request(server.app)
+        .delete('/favourites')
+        .end((err, res) => {
+            expect(res.status).toEqual(404)
+            done()
+        })
+});
+
+test("Should return 200 (delete)", (done) => {
+    request(server.app).post('/favourites/Moscow').end()
+    request(server.app)
+        .delete('/favourites/Moscow')
+        .end((err, res) => {
+            expect(res.status).toEqual(200)
+            chai.expect(res).to.be.json
+            done()
+        })
+});
 

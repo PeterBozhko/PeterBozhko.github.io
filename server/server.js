@@ -82,7 +82,12 @@ app.get('/favourites', cors(corsOptions), function (req, res) {
 })
 
 app.post('/favourites/:city', cors(corsOptions), async (req, res) => {
-    const city = encodeURI(req.params.city)
+    let city = req.params.city
+    if (typeof city !== 'string') {
+        res.status(422).end()
+        return
+    }
+    city = encodeURI(city)
     const weather = await getWeatherByName(city)
     let userKey = req.cookies.userKey
     if(typeof(userKey) == 'undefined') {
@@ -117,6 +122,10 @@ app.post('/favourites/:city', cors(corsOptions), async (req, res) => {
 app.delete('/favourites/:city', cors(corsOptions), (req, res) => {
     let userKey = req.cookies.userKey
     const city = req.params.city
+    if (typeof city !== 'string') {
+        res.status(422).end()
+        return
+    }
     if (!userKey) {
         res.json({ "success": false, "message": 'User undefined' })
     }
@@ -186,4 +195,4 @@ function createAnswer(data) {
     }
     else return {"success" : false, "message" : "API не отвечает, скорее всего город не существует"}
 }
-module.exports = { app, getWeatherByName, getWeather};
+module.exports = {db, app, getWeatherByName, getWeather, getWeatherByCoord};
