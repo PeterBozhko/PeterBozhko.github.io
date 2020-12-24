@@ -1,6 +1,7 @@
+const fetchMock = require("jest-fetch-mock")
+fetchMock.enableMocks();
 const front = require('../js/script.js')
 const sinon = require('sinon')
-const fetch = require('node-fetch')
 let sampleRequest = {
     "name": 'name',
     "temp": 100,
@@ -20,26 +21,24 @@ let sampleRequest = {
     "message": ""
 }
 
+fetch.mockResponse(JSON.stringify(sampleRequest));
 test("just for test", () => {
     expect(2).toBe(2)
-})
-// sinon.stub(front, 'getWeather').returns(sampleRequest)
-// sinon.stub(front, 'getWeatherByName').returns(sampleRequest)
-// sinon.stub(front, 'getWeatherByCoord').returns(sampleRequest)
-
-// test("#wheatherID should return sunny", (done) => {
-//         expect(front.weatherIdToIcon(800)).toEqual('sunny')
-//     }
-// )
+});
+test("#wheatherID should return sunny", (done) => {
+        expect(front.weatherIdToIcon(800)).toEqual('sunny')
+        done()
+    }
+)
 
 // test('#loadFavorites should get 3 cities', async (done) => {
-//         sandbox.stub(front, 'getFavourites').returns({success: true, cities: ["Аша", "Москва", "Челябинск"]})
-//         await front.loadFavorites()
-//         expect(document.getElementsByClassName('favorites-ul')[0].children.length).toEqual(3)
-//         for (let child of document.getElementsByClassName('favorites-ul')[0].children){
-//             document.getElementsByClassName('favorites-ul')[0].removeChild(child)
-//         }
-//     })
+//     fetch.mockResponseOnce(JSON.stringify({success: true, cities: ["Аша", "Москва", "Челябинск"]}));
+//     await front.loadFavorites()
+//     expect(document.getElementsByClassName('favorites-ul')[0].children.length).toEqual(3)
+//     for (let child of document.getElementsByClassName('favorites-ul')[0].children){
+//         document.getElementsByClassName('favorites-ul')[0].removeChild(child)
+//     }
+// });
 // test('#loadFavorites should get 4 cities', async (done) => {
 //     sandbox.stub(front, 'getFavourites').returns({success: true, cities: ["Аша", "Москва", "Челябинск", "Казань"]})
 //     await front.loadFavorites()

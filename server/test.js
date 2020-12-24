@@ -3,6 +3,8 @@ const sinon = require('sinon')
 const chai = require('chai')
 const chaiHttp = require('chai-http')
 chai.use(chaiHttp);
+const fetchMock = require("jest-fetch-mock")
+fetchMock.enableMocks();
 const { request } = chai
 const sampleResponse = {
     "coord": {
@@ -49,7 +51,7 @@ const sampleResponse = {
     "cod": 200
 };
 
-
+fetch.mockResponse(JSON.stringify(sampleResponse));
 beforeEach(async () => {
     await sinon.stub(server, 'getWeather').returns(sampleResponse);
     await sinon.stub(server, 'getWeatherByName').returns(sampleResponse);

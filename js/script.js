@@ -328,4 +328,4 @@ async function updateCity(event) {
     document.querySelector('ul.favorites-ul').replaceChild(createCityCard(data), document.getElementById(cityName));
 }
 
-module.exports = {getWeather, getWeatherByCoord, getWeatherByName, getFavourites, loadFavorites, weatherIdToIcon}
+module.exports = {getWeather, getWeatherByCoord, getWeatherByName, getFavourites, loadFavorites, weatherIdToIcon, degreesToDirection}

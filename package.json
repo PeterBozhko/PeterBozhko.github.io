@@ -4,6 +4,7 @@
   "description": "lab3",
   "main": "server.js",
   "dependencies": {
+    "@jest/globals": "^26.6.2",
     "chai": "^4.2.0",
     "chai-http": "^4.3.0",
     "express": "^4.17.1",
@@ -17,7 +18,9 @@
   "devDependencies": {
     "cookie-parser": "^1.4.5",
     "cors": "^2.8.5",
-    "sinon": "^9.2.2"
+    "jest-fetch-mock": "^3.0.3",
+    "sinon": "^9.2.2",
+    "whatwg-fetch": "^3.5.0"
   },
   "scripts": {
     "test": "jest"
