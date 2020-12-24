@@ -15,17 +15,24 @@ function initialization() {
 }
 
 async function getWeather(url, method){
-    let response = await fetch(url, { method: method, credentials: 'include', secure: true});
-    if (response.ok) {
-        let res = await response.json()
-        if (res.success){
-            return res
+    try {
+        let response = await fetch(url, { method: method, credentials: 'include', secure: true});
+        if (response.ok) {
+            let res = await response.json()
+            if (res.success){
+                return res
+            } else {
+                throw res.message
+            }
         } else {
-            throw res.message
+            throw "Нет связи с сервером"
         }
-    } else {
-        throw "Нет связи с сервером"
     }
+    catch (err) {
+        alert('Нет связи с сервером')
+        throw err
+    }
+
 }
 
 function getWeatherByName(cityName){
@@ -48,9 +55,13 @@ function putFavourite(cityName){
     return getWeather(requestURL, "POST");
 }
 
-function deleteFavourite(cityName){
+async function deleteFavourite(cityName){
     let requestURL = serverLink + '/favourites/' + encodeURI(cityName);
-    getWeather(requestURL, "DELETE").then(r => null);
+    try {
+        await getWeather(requestURL, "DELETE")
+    }catch (err){
+        throw err
+    }
 }
 // function recieveWeatherData(cityName) {
 //     return {
@@ -203,12 +214,21 @@ async function addCity(event) {
     }
 }
 
-function deleteCity(event) {
+async function deleteCity(event) {
     let el = event.currentTarget
     let cityName = el.parentNode.querySelector('h3').innerHTML;
-    deleteFavourite(cityName)
-    let card = el.parentNode.parentNode;
-    card.parentNode.removeChild(card);
+    console.log(el)
+    el.disabled = true;
+    try {
+        await deleteFavourite(cityName)
+        let card = el.parentNode.parentNode;
+        card.parentNode.removeChild(card);
+    }
+    catch (err) {
+        alert('Ошибка удаления')
+        el.disabled = false;
+        return;
+    }
 }
 
 async function loadFavorites() {
@@ -307,3 +327,5 @@ async function updateCity(event) {
     }
     document.querySelector('ul.favorites-ul').replaceChild(createCityCard(data), document.getElementById(cityName));
 }
+
+module.exports = {getWeather, getWeatherByCoord, getWeatherByName, getFavourites, loadFavorites, weatherIdToIcon}
